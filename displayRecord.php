@@ -147,8 +147,9 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
     {
     	
     ?>
-   <h4>Treatment Date: <?php echo $row1["treatment_date"]; ?></h4>
-        <div border="1">
+   <h4>Treatment Date: <?php echo $row1["treatment_date"]; ?></h4><br>
+   <h5>Treatment Note: <?php echo $row1["treatment_note"] ?></h5>
+        <div>
             <img src="img/white.jpg" height="42"/>
             <img src="img/white.jpg" height="42"/>
             <img src="img/white.jpg" height="42"/>
