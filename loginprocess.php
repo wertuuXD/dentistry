@@ -16,18 +16,22 @@ if (isset($_POST['login']))
 
     if ($result)
     {
-    $_SESSION['username'] = $_POST['username'];
-    if($result['level'] == "registrar")
-    {
-        header("Location:appointmentListReg.php"); 
-    }
-    elseif ($result['level'] == "dentist") 
-    {
-        header("Location:appointmentListDen.php");
-    }
-    echo "<script>alert('Sorry wrong username or password')
-    location.href='login.php'
-    </script>";
+        $_SESSION['username'] = $_POST['username'];
+        if($result['level'] == "registrar")
+        {
+            header("Location:appointmentListReg.php"); 
+        }
+        elseif ($result['level'] == "dentist") 
+        {
+            header("Location:appointmentListDen.php");
+        }
+        else
+        {
+            echo "<script>alert('Sorry wrong username or password')
+        location.href='login.php'
+        </script>";
+        }
+        
     }
     else
     {

@@ -129,19 +129,26 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
    <br><br>
     <?php
      $result1 = mysqli_query($conn, "SELECT * FROM treatment_record WHERE patient_id  = $id order by treatment_date DESC") or die("Error Running MySQL query");
+     $row2 = mysqli_fetch_assoc($result1)
    
     
    ?>
 
    <h3>Treatment Record</h3><br>
- <!--   Record: <img src="img/<?php echo $row1["gg_12"]; ?>.png"/>  -->
+ 
    <br>
    <?php
-
+if($row2 == false)
+{
+  echo "no data";
+}
+else
+{
   while ($row1 = mysqli_fetch_assoc($result1)) 
   {
   	
  ?>
+ <h4>Treatment Date: <?php echo $row1["treatment_date"]; ?></h4>
 <div>
         <img src="img/white.jpg" height="42"/>
         <img src="img/white.jpg" height="42"/>
@@ -218,7 +225,10 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
     </div>
 
 <br><br><br>
-
+  <?php
+ }
+}
+   ?>
    <button onclick="goBack()">Back</button>
 
    <script>
@@ -230,9 +240,7 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
 </div>
 
 </div>
-<?php
- }
-   ?>
+
 
 
 
