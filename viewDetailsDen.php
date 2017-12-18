@@ -38,13 +38,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="appointmentListReg">Home</a>
+              <a class="nav-link js-scroll-trigger" href="appointmentListReg.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="listDen.php">Patient List</a>
+              <a class="nav-link js-scroll-trigger" href="registerPatient.php">Register Patient</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="report.php">Report Statistic</a>
+              <a class="nav-link js-scroll-trigger" href="listReg.php">Patient List</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="logout.php" onclick="javascript:return confirm('Are you sure you want to log out?');">Logout</a>
@@ -56,12 +56,10 @@
 
 <br><br>
 
-<section id="viewDetailsDen">
+<section id="appointmentPart">
   <div class="container">
     <h3 class="text-center">Patient Information</h3>
     <hr class="star-primary">
-    
-<br>
 
 <div align="center">
 <form name="borang2" method="post" action="updateDetails.php">
@@ -86,7 +84,7 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
 
 
      <tr>
-      
+
          <td width="196" height="24"><br>
            Patient Id :</td>
          <td width="229" height="24"><br><?php echo $row["patient_id"];?></td>
@@ -97,14 +95,14 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
            Patient Name :</td>
          <td height="24"><br><?php echo $row["name"];?></td>
         </tr>
-        
+
          <tr>
          <td height="24"><br>
           Matric/Staff No :</td>
         <td height="24"><br><?php echo $row["matric_staffno"];?></td>
         </tr>
 
-        <tr>
+         <tr>
          <td height="24"><br>
            Faculty/Department :</td>
          <td height="24"><br><?php echo $row["fac_dept"];?></td>
@@ -146,11 +144,81 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
          <td height="24"><br><?php echo $row["address"];?></td>
          </tr>
 
+
+         <tr>
+         <td height="24"><br>
+          </td>
+         <td height="24"><br></td>
+         </tr>
+
+
+
+          <div class="box">
+          <table width="80%" class="table table-stripped table-hover table-bordered">
+          <center>
+          <thead>
+          <tr class="text-center">
+          <th>Allergies</th>
+          <th>Asthma</th>
+          <th>Diabetes</th>
+          <th>Hypertension</th>
+          <th>Blood Dyscrasias</th>
+          <th>Heart Disease</th>
+          <th>Congenital Heart</th>
+          <th>Other Disease</th>
+          <th>Medication Taken</th>
+
+          </tr>
+          </thead>
+          <tbody>
+
+          <?php
+          include ('connect.php');
+          $id = $_GET['id'];
+          $result = mysqli_query ($conn,"SELECT * FROM medical_history where patient_id = $id") or die
+          ("Error running MySQL query");
+
+
+          while($row = mysqli_fetch_assoc($result))
+          {
+
+          echo "<tr>";
+          echo "<td>".$row['allergies']."</td>";
+          echo "<td>".$row['asthma']."</td>";
+          echo "<td>".$row['diabetes']."</td>";
+          echo "<td>".$row['hypertension']."</td>";
+          echo "<td>".$row['blooddyscrasias']."</td>";
+          echo "<td>".$row['heartdisease']."</td>";
+          echo "<td>".$row['congenitalheart']."</td>";
+          echo "<td>".$row['otherdisease']."</td>";
+          echo "<td>".$row['medictaken']."</td>";
+
+
+          ?>
+
+          <?php
+          echo "</tr>";
+          }
+          echo "</table>";
+
+
+          //Freeing all memory associated with it
+          mysqli_free_result($result);
+          //Closes apecified connection
+          mysqli_close($conn);
+          ?>
+          </tbody>
+          </center>
+          </table>
+          </div>
+
+
+
        <tr>
          <td height="23" colspan="2"><div align="center"><br><br>
          &nbsp; &nbsp; &nbsp; &nbsp;
 
-           <input type="button" a href="listDen.php" onclick="history.back();" value="BACK" />
+           <input type="button" a href="listReg.php" onclick="history.back();" value="BACK" />
          </div></td>
          </tr>
      </table>
@@ -189,4 +257,3 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
 </body>
 
 </html>
-

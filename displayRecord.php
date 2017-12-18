@@ -127,108 +127,107 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
 
    </form>
    <br><br>
-    <?php
-     $result1 = mysqli_query($conn, "SELECT * FROM treatment_record WHERE patient_id  = $id order by treatment_date DESC") or die("Error Running MySQL query");
-     $row2 = mysqli_fetch_assoc($result1)
-   
-    
-   ?>
+
 
    <h3>Treatment Record</h3><br>
  
    <br>
    <?php
-if($row2 == false)
-{
-  echo "no data";
-}
-else
-{
-  while ($row1 = mysqli_fetch_assoc($result1)) 
+   $result1 = mysqli_query($conn, "SELECT * FROM treatment_record WHERE patient_id  = $id order by treatment_date DESC") or die("Error Running MySQL query");
+     $row2 = mysqli_fetch_assoc($result1);
+   
+  if($row2 == false)
   {
-  	
- ?>
- <h4>Treatment Date: <?php echo $row1["treatment_date"]; ?></h4>
-<div>
-        <img src="img/white.jpg" height="42"/>
-        <img src="img/white.jpg" height="42"/>
-        <img src="img/white.jpg" height="42"/>
-        <img src="img/<?php echo $row1["gg_55"]; ?>.png" id="gg_55" height="42" class="btn1 btn-success" data-id="55"/>
-        <img src="img/<?php echo $row1["gg_54"]; ?>.png" id="gg_54" height="42" class="btn1 btn-success" data-id="54"/>
-        <img src="img/<?php echo $row1["gg_53"]; ?>.png" id="gg_53" height="42" class="btn1 btn-success" data-id="53"/>
-        <img src="img/<?php echo $row1["gg_52"]; ?>.png" id="gg_52" height="42" class="btn1 btn-success" data-id="52"/>
-        <img src="img/<?php echo $row1["gg_51"]; ?>.png" id="gg_51" height="42" class="btn1 btn-success" data-id="51"/>
-        <img src="img/<?php echo $row1["gg_61"]; ?>.png" id="gg_61" height="42" class="btn1 btn-success" data-id="61"/>
-        <img src="img/<?php echo $row1["gg_62"]; ?>.png" id="gg_62" height="42" class="btn1 btn-success" data-id="62"/>
-        <img src="img/<?php echo $row1["gg_63"]; ?>.png" id="gg_63" height="42" class="btn1 btn-success" data-id="63"/>
-        <img src="img/<?php echo $row1["gg_64"]; ?>.png" id="gg_64" height="42" class="btn1 btn-success" data-id="64"/>
-        <img src="img/<?php echo $row1["gg_65"]; ?>.png" id="gg_65" height="42" class="btn1 btn-success" data-id="65"/>
-        <img src="img/white.jpg" height="42"/>
-        <img src="img/white.jpg" height="42"/>        
-        <img src="img/white.jpg" height="42"/>        
-    </div>
-    <div>
-        <img src="img/<?php echo $row1["gg_18"]; ?>.png" id="gg_18" height="42" class="btn1 btn-success"  data-id="18"/>
-        <img src="img/<?php echo $row1["gg_17"]; ?>.png" id="gg_17" height="42" class="btn1 btn-success"  data-id="17"/>
-        <img src="img/<?php echo $row1["gg_16"]; ?>.png" id="gg_16" height="42" class="btn1 btn-success"  data-id="16"/>
-        <img src="img/<?php echo $row1["gg_15"]; ?>.png" id="gg_15" height="42" class="btn1 btn-success"  data-id="15"/>
-        <img src="img/<?php echo $row1["gg_14"]; ?>.png" id="gg_14" height="42" class="btn1 btn-success"  data-id="14"/>
-        <img src="img/<?php echo $row1["gg_13"]; ?>.png" id="gg_13" height="42" class="btn1 btn-success"  data-id="13"/>
-        <img src="img/<?php echo $row1["gg_12"]; ?>.png" id="gg_12" height="42" class="btn1 btn-success"  data-id="12"/>
-        <img src="img/<?php echo $row1["gg_11"]; ?>.png" id="gg_11" height="42" class="btn1 btn-success"  data-id="11"/>
-        <img src="img/<?php echo $row1["gg_21"]; ?>.png" id="gg_21" height="42" class="btn1 btn-success"  data-id="21"/>
-        <img src="img/<?php echo $row1["gg_22"]; ?>.png" id="gg_22" height="42" class="btn1 btn-success"  data-id="22"/>
-        <img src="img/<?php echo $row1["gg_23"]; ?>.png" id="gg_23" height="42" class="btn1 btn-success"  data-id="23"/>
-        <img src="img/<?php echo $row1["gg_24"]; ?>.png" id="gg_24" height="42" class="btn1 btn-success"  data-id="24"/>
-        <img src="img/<?php echo $row1["gg_25"]; ?>.png" id="gg_25" height="42" class="btn1 btn-success"  data-id="25"/>
-        <img src="img/<?php echo $row1["gg_26"]; ?>.png" id="gg_26" height="42" class="btn1 btn-success"  data-id="26"/>
-        <img src="img/<?php echo $row1["gg_27"]; ?>.png" id="gg_27" height="42" class="btn1 btn-success"  data-id="27"/>
-        <img src="img/<?php echo $row1["gg_28"]; ?>.png" id="gg_28" height="42" class="btn1 btn-success"  data-id="28"/>     
-    </div>    
-    <div class="gap"><br><br><br>
-    </div>  
-    <div>
-        <img src="img/<?php echo $row1["gg_48"]; ?>.png" id="gg_48" height="42" class="btn1 btn-success"  data-id="48"/>
-        <img src="img/<?php echo $row1["gg_47"]; ?>.png" id="gg_47" height="42" class="btn1 btn-success"  data-id="47"/> 
-        <img src="img/<?php echo $row1["gg_46"]; ?>.png" id="gg_46" height="42" class="btn1 btn-success"  data-id="46"/>       
-        <img src="img/<?php echo $row1["gg_45"]; ?>.png" id="gg_45" height="42" class="btn1 btn-success"  data-id="45"/>    
-        <img src="img/<?php echo $row1["gg_44"]; ?>.png" id="gg_44" height="42" class="btn1 btn-success"  data-id="44"/> 
-        <img src="img/<?php echo $row1["gg_43"]; ?>.png" id="gg_43" height="42" class="btn1 btn-success"  data-id="43"/>
-        <img src="img/<?php echo $row1["gg_42"]; ?>.png" id="gg_42" height="42" class="btn1 btn-success"  data-id="42"/>        
-        <img src="img/<?php echo $row1["gg_41"]; ?>.png" id="gg_41" height="42" class="btn1 btn-success"  data-id="41"/>
-        <img src="img/<?php echo $row1["gg_31"]; ?>.png" id="gg_31" height="42" class="btn1 btn-success"  data-id="31"/>
-        <img src="img/<?php echo $row1["gg_32"]; ?>.png" id="gg_32" height="42" class="btn1 btn-success"  data-id="32"/>
-        <img src="img/<?php echo $row1["gg_33"]; ?>.png" id="gg_33" height="42" class="btn1 btn-success"  data-id="33"/>
-        <img src="img/<?php echo $row1["gg_34"]; ?>.png" id="gg_34" height="42" class="btn1 btn-success"  data-id="34"/>
-        <img src="img/<?php echo $row1["gg_35"]; ?>.png" id="gg_35" height="42" class="btn1 btn-success"  data-id="35"/>
-        <img src="img/<?php echo $row1["gg_36"]; ?>.png" id="gg_36" height="42" class="btn1 btn-success"  data-id="36"/>
-        <img src="img/<?php echo $row1["gg_37"]; ?>.png" id="gg_37" height="42" class="btn1 btn-success"  data-id="37"/>
-        <img src="img/<?php echo $row1["gg_38"]; ?>.png" id="gg_38" height="42" class="btn1 btn-success"  data-id="38"/>      
-    </div>
-    <div>
-        <img src="img/white.jpg" height="42"/>
-        <img src="img/white.jpg" height="42"/>
-        <img src="img/white.jpg" height="42"/>
-        <img src="img/<?php echo $row1["gg_85"]; ?>.png" id="gg_85" height="42" class="btn1 btn-success" data-id="85"/>
-        <img src="img/<?php echo $row1["gg_84"]; ?>.png" id="gg_84" height="42" class="btn1 btn-success" data-id="84"/>
-        <img src="img/<?php echo $row1["gg_83"]; ?>.png" id="gg_83" height="42" class="btn1 btn-success"  data-id="83"/>
-        <img src="img/<?php echo $row1["gg_82"]; ?>.png" id="gg_82" height="42" class="btn1 btn-success"  data-id="82"/>  
-        <img src="img/<?php echo $row1["gg_81"]; ?>.png" id="gg_81" height="42" class="btn1 btn-success"  data-id="81"/>  
-        <img src="img/<?php echo $row1["gg_71"]; ?>.png" id="gg_71" height="42" class="btn1 btn-success"  data-id="71"/>  
-        <img src="img/<?php echo $row1["gg_72"]; ?>.png" id="gg_72" height="42" class="btn1 btn-success"  data-id="72"/> 
-        <img src="img/<?php echo $row1["gg_73"]; ?>.png" id="gg_73" height="42" class="btn1 btn-success"  data-id="73"/>  
-        <img src="img/<?php echo $row1["gg_74"]; ?>.png" id="gg_74" height="42" class="btn1 btn-success"  data-id="74"/>      
-        <img src="img/<?php echo $row1["gg_75"]; ?>.png" id="gg_75" height="42" class="btn1 btn-success"  data-id="75"/>
-        <img src="img/white.jpg" height="42"/>
-        <img src="img/white.jpg" height="42"/>        
-        <img src="img/white.jpg" height="42"/>       
-    </div>
+    echo "<h5>No Previous Record<h5>";
+  }
+  else
+  {
+    $result2 = mysqli_query($conn, "SELECT * FROM treatment_record WHERE patient_id  = $id order by treatment_date DESC") or die("Error Running MySQL query");
+    while ($row1 = mysqli_fetch_assoc($result2)) 
+    {
+    	
+    ?>
+   <h4>Treatment Date: <?php echo $row1["treatment_date"]; ?></h4>
+        <div border="1">
+            <img src="img/white.jpg" height="42"/>
+            <img src="img/white.jpg" height="42"/>
+            <img src="img/white.jpg" height="42"/>
+            <img src="img/<?php echo $row1["gg_55"]; ?>.png" id="gg_55" height="42" class="btn1 btn-success" data-id="55"/>
+            <img src="img/<?php echo $row1["gg_54"]; ?>.png" id="gg_54" height="42" class="btn1 btn-success" data-id="54"/>
+            <img src="img/<?php echo $row1["gg_53"]; ?>.png" id="gg_53" height="42" class="btn1 btn-success" data-id="53"/>
+            <img src="img/<?php echo $row1["gg_52"]; ?>.png" id="gg_52" height="42" class="btn1 btn-success" data-id="52"/>
+            <img src="img/<?php echo $row1["gg_51"]; ?>.png" id="gg_51" height="42" class="btn1 btn-success" data-id="51"/>
+            <img src="img/<?php echo $row1["gg_61"]; ?>.png" id="gg_61" height="42" class="btn1 btn-success" data-id="61"/>
+            <img src="img/<?php echo $row1["gg_62"]; ?>.png" id="gg_62" height="42" class="btn1 btn-success" data-id="62"/>
+            <img src="img/<?php echo $row1["gg_63"]; ?>.png" id="gg_63" height="42" class="btn1 btn-success" data-id="63"/>
+            <img src="img/<?php echo $row1["gg_64"]; ?>.png" id="gg_64" height="42" class="btn1 btn-success" data-id="64"/>
+            <img src="img/<?php echo $row1["gg_65"]; ?>.png" id="gg_65" height="42" class="btn1 btn-success" data-id="65"/>
+            <img src="img/white.jpg" height="42"/>
+            <img src="img/white.jpg" height="42"/>        
+            <img src="img/white.jpg" height="42"/>        
+        </div>
+        <div>
+            <img src="img/<?php echo $row1["gg_18"]; ?>.png" id="gg_18" height="42" class="btn1 btn-success"  data-id="18"/>
+            <img src="img/<?php echo $row1["gg_17"]; ?>.png" id="gg_17" height="42" class="btn1 btn-success"  data-id="17"/>
+            <img src="img/<?php echo $row1["gg_16"]; ?>.png" id="gg_16" height="42" class="btn1 btn-success"  data-id="16"/>
+            <img src="img/<?php echo $row1["gg_15"]; ?>.png" id="gg_15" height="42" class="btn1 btn-success"  data-id="15"/>
+            <img src="img/<?php echo $row1["gg_14"]; ?>.png" id="gg_14" height="42" class="btn1 btn-success"  data-id="14"/>
+            <img src="img/<?php echo $row1["gg_13"]; ?>.png" id="gg_13" height="42" class="btn1 btn-success"  data-id="13"/>
+            <img src="img/<?php echo $row1["gg_12"]; ?>.png" id="gg_12" height="42" class="btn1 btn-success"  data-id="12"/>
+            <img src="img/<?php echo $row1["gg_11"]; ?>.png" id="gg_11" height="42" class="btn1 btn-success"  data-id="11"/>
+            <img src="img/<?php echo $row1["gg_21"]; ?>.png" id="gg_21" height="42" class="btn1 btn-success"  data-id="21"/>
+            <img src="img/<?php echo $row1["gg_22"]; ?>.png" id="gg_22" height="42" class="btn1 btn-success"  data-id="22"/>
+            <img src="img/<?php echo $row1["gg_23"]; ?>.png" id="gg_23" height="42" class="btn1 btn-success"  data-id="23"/>
+            <img src="img/<?php echo $row1["gg_24"]; ?>.png" id="gg_24" height="42" class="btn1 btn-success"  data-id="24"/>
+            <img src="img/<?php echo $row1["gg_25"]; ?>.png" id="gg_25" height="42" class="btn1 btn-success"  data-id="25"/>
+            <img src="img/<?php echo $row1["gg_26"]; ?>.png" id="gg_26" height="42" class="btn1 btn-success"  data-id="26"/>
+            <img src="img/<?php echo $row1["gg_27"]; ?>.png" id="gg_27" height="42" class="btn1 btn-success"  data-id="27"/>
+            <img src="img/<?php echo $row1["gg_28"]; ?>.png" id="gg_28" height="42" class="btn1 btn-success"  data-id="28"/>     
+        </div>    
+        <div class="gap"><br><br><br>
+        </div>  
+        <div>
+            <img src="img/<?php echo $row1["gg_48"]; ?>.png" id="gg_48" height="42" class="btn1 btn-success"  data-id="48"/>
+            <img src="img/<?php echo $row1["gg_47"]; ?>.png" id="gg_47" height="42" class="btn1 btn-success"  data-id="47"/> 
+            <img src="img/<?php echo $row1["gg_46"]; ?>.png" id="gg_46" height="42" class="btn1 btn-success"  data-id="46"/>       
+            <img src="img/<?php echo $row1["gg_45"]; ?>.png" id="gg_45" height="42" class="btn1 btn-success"  data-id="45"/>    
+            <img src="img/<?php echo $row1["gg_44"]; ?>.png" id="gg_44" height="42" class="btn1 btn-success"  data-id="44"/> 
+            <img src="img/<?php echo $row1["gg_43"]; ?>.png" id="gg_43" height="42" class="btn1 btn-success"  data-id="43"/>
+            <img src="img/<?php echo $row1["gg_42"]; ?>.png" id="gg_42" height="42" class="btn1 btn-success"  data-id="42"/>        
+            <img src="img/<?php echo $row1["gg_41"]; ?>.png" id="gg_41" height="42" class="btn1 btn-success"  data-id="41"/>
+            <img src="img/<?php echo $row1["gg_31"]; ?>.png" id="gg_31" height="42" class="btn1 btn-success"  data-id="31"/>
+            <img src="img/<?php echo $row1["gg_32"]; ?>.png" id="gg_32" height="42" class="btn1 btn-success"  data-id="32"/>
+            <img src="img/<?php echo $row1["gg_33"]; ?>.png" id="gg_33" height="42" class="btn1 btn-success"  data-id="33"/>
+            <img src="img/<?php echo $row1["gg_34"]; ?>.png" id="gg_34" height="42" class="btn1 btn-success"  data-id="34"/>
+            <img src="img/<?php echo $row1["gg_35"]; ?>.png" id="gg_35" height="42" class="btn1 btn-success"  data-id="35"/>
+            <img src="img/<?php echo $row1["gg_36"]; ?>.png" id="gg_36" height="42" class="btn1 btn-success"  data-id="36"/>
+            <img src="img/<?php echo $row1["gg_37"]; ?>.png" id="gg_37" height="42" class="btn1 btn-success"  data-id="37"/>
+            <img src="img/<?php echo $row1["gg_38"]; ?>.png" id="gg_38" height="42" class="btn1 btn-success"  data-id="38"/>      
+        </div>
+        <div>
+            <img src="img/white.jpg" height="42"/>
+            <img src="img/white.jpg" height="42"/>
+            <img src="img/white.jpg" height="42"/>
+            <img src="img/<?php echo $row1["gg_85"]; ?>.png" id="gg_85" height="42" class="btn1 btn-success" data-id="85"/>
+            <img src="img/<?php echo $row1["gg_84"]; ?>.png" id="gg_84" height="42" class="btn1 btn-success" data-id="84"/>
+            <img src="img/<?php echo $row1["gg_83"]; ?>.png" id="gg_83" height="42" class="btn1 btn-success"  data-id="83"/>
+            <img src="img/<?php echo $row1["gg_82"]; ?>.png" id="gg_82" height="42" class="btn1 btn-success"  data-id="82"/>  
+            <img src="img/<?php echo $row1["gg_81"]; ?>.png" id="gg_81" height="42" class="btn1 btn-success"  data-id="81"/>  
+            <img src="img/<?php echo $row1["gg_71"]; ?>.png" id="gg_71" height="42" class="btn1 btn-success"  data-id="71"/>  
+            <img src="img/<?php echo $row1["gg_72"]; ?>.png" id="gg_72" height="42" class="btn1 btn-success"  data-id="72"/> 
+            <img src="img/<?php echo $row1["gg_73"]; ?>.png" id="gg_73" height="42" class="btn1 btn-success"  data-id="73"/>  
+            <img src="img/<?php echo $row1["gg_74"]; ?>.png" id="gg_74" height="42" class="btn1 btn-success"  data-id="74"/>      
+            <img src="img/<?php echo $row1["gg_75"]; ?>.png" id="gg_75" height="42" class="btn1 btn-success"  data-id="75"/>
+            <img src="img/white.jpg" height="42"/>
+            <img src="img/white.jpg" height="42"/>        
+            <img src="img/white.jpg" height="42"/>       
+        </div>
 
-<br><br><br>
-  <?php
- }
+    <br><br><br>
+      <?php
+     }
 }
-   ?>
+   ?><br>
    <button onclick="goBack()">Back</button>
 
    <script>
