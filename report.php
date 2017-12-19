@@ -122,11 +122,11 @@ $stud_male = mysqli_num_rows($query3);
         {
           label: "Male",
           backgroundColor: "#3e95cd",
-          data: [<?php echo $staff_fmale; ?>,<?php echo $stud_fmale; ?>]
+          data: [<?php echo $staff_male; ?>,<?php echo $stud_male; ?>]
         }, {
           label: "Female",
           backgroundColor: "#8e5ea2",
-          data: [<?php echo $staff_male; ?>,<?php echo $stud_male; ?>]
+          data: [<?php echo $staff_fmale; ?>,<?php echo $stud_fmale; ?>]
         }
       ]
     },
@@ -548,9 +548,11 @@ new Chart(document.getElementById("bar-chart-grouped2"), {
 
 </script>
 
+<br><br>
 
-
-
+<div id="profile" align="center">
+<a titlt="print screen" alt="print screen" onClick="window.print();" "target="_blank" style="cursor:pointer;"><img src="img/printer.png" width="50" height="50"></a>
+</div>
 
 
 
