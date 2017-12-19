@@ -27,6 +27,17 @@
 
   <body id="page-top">
 
+<?php
+  
+  if(isset($_REQUEST['error']))
+  {
+    echo "<script>alert('Please input your username and password')
+        
+    </script>";
+
+  }
+
+?>
   
 
 <br><br>
@@ -39,7 +50,7 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
 
-            <form name="login" id="loginForm" method="post" action="loginprocess.php">
+            <form name="loginform" id="loginForm" method="post" action="loginprocess.php">
               <div class="control-group">
                 <div class="form-group floating-label-form-group controls">
                   <label>Username</label>
