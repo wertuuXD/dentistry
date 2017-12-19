@@ -27,17 +27,24 @@
 
   <body id="page-top">
 
-<?php
-  
-  if(isset($_REQUEST['error']))
-  {
-    echo "<script>alert('Please input correct username and password')
-        
-    </script>";
+  <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">UTeM Dental System</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="logout.php" onclick="javascript:return confirm('Are you sure you want to log out?');">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-  }
-
-?>
   
 
 <br><br>
@@ -45,12 +52,12 @@
     <!-- Login Section -->
     <section id="loginPart">
       <div class="container">
-        <h2 class="text-center">Login</h2>
+        <h2 class="text-center">User Registration</h2>
         <hr class="star-primary">
         <div class="row">
           <div class="col-lg-8 mx-auto">
 
-            <form name="loginform" id="loginForm" method="post" action="loginprocess.php">
+            <form name="loginform" id="loginForm" method="post" action="adminprocess.php">
               <div class="control-group">
                 <div class="form-group floating-label-form-group controls">
                   <label>Username</label>
@@ -65,11 +72,20 @@
                   <p class="help-block text-danger"></p>
                 </div>
               </div>
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                  <label>Position</label>
+                  <select class="form-control" name="level" id="level">
+                    <option value="registrar">REGISTRAR</option>
+                    <option value="dentist">DENTIST</option>
+                  </select>  
+                </div>
+              </div>
 
               <br>
               <div id="success"></div>
               <div class="form-group">
-                <button type="submit" class="btn btn-success btn-lg" id="login" name="login">Login</button>
+                <button type="submit" class="btn btn-success btn-lg" id="login" name="login">Register</button>
               </div>
             </form>
           </div>

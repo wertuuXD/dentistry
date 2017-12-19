@@ -7,8 +7,9 @@ if (isset($_POST['login']))
 
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $hashed_password = md5($password);
 
-    $sql = "SELECT * FROM `user` WHERE username = '".$username."' and password = '".$password."' ";
+    $sql = "SELECT * FROM `user` WHERE username = '".$username."' and password = '".$hashed_password."' ";
     $query = mysqli_query($conn,$sql) ;
     $result = mysqli_fetch_assoc($query) ;
     
@@ -23,6 +24,10 @@ if (isset($_POST['login']))
         else if ($result['level'] == "dentist") 
         {
             header("Location:appointmentListDen.php?error=0");
+        }
+        else if ($result['level'] == "admin")
+        {
+            header("Location:admin.php?error=0");
         }
         else
         {
