@@ -56,10 +56,14 @@
 
 <br><br>
 
+
+
 <section id="treatmentRecord">
   <div class="container">
     <h3 class="text-center">Patient Treatment Record</h3>
     <hr class="star-primary">
+
+
 
 <?php
 include ('connect.php');
@@ -83,7 +87,7 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
 
 
      <tr>
-      
+
          <td width="196" height="24"><br>
            Patient Id :</td>
          <td width="229" height="24"><br><?php echo $row["patient_id"];?></td>
@@ -94,7 +98,7 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
            Patient Name :</td>
          <td height="24"><br><?php echo $row["name"];?></td>
         </tr>
-        
+
          <tr>
          <td height="24"><br>
           Matric/Staff No :</td>
@@ -125,7 +129,7 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
          <td height="24"><br><input type="text" name="details_notes"></td>
          </tr>
 
-         
+
 
 
        <tr>
@@ -173,4 +177,3 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
 </body>
 
 </html>
-

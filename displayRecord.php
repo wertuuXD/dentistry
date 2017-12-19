@@ -60,7 +60,7 @@
   <div class="container">
     <h3 class="text-center">Patient Record</h3>
     <hr class="star-primary">
-    
+
 
 <div align="center">
 <form name="borang2" method="post" action="updateDetails.php">
@@ -83,20 +83,12 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
          <th colspan="2" scope="col"></th>
        </tr>
 
-
-     <tr>
-      
-         <td width="196" height="24"><br>
-           Patient Id :</td>
-         <td width="229" height="24"><br><?php echo $row["patient_id"];?></td>
-        </tr>
-
        <tr>
          <td height="24"><br>
            Patient Name :</td>
          <td height="24"><br><?php echo $row["name"];?></td>
         </tr>
-        
+
          <tr>
          <td height="24"><br>
           Matric/Staff No :</td>
@@ -115,27 +107,53 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
          <td height="24"><br><?php echo $row["ic_passno"];?></td>
          </tr>
 
-         
+
        <tr>
          <td height="23" colspan="2"><div align="center"><br><br>
          &nbsp; &nbsp; &nbsp; &nbsp;
 
-           
+
          </div></td>
          </tr>
      </table>
 
    </form>
-   <br><br>
+
+   <h3>Treatment Record</h3>
+
+   <form id="searchDate" name="searchDate" action="searchDate.php?id=<?php echo $id;?>" method="post">
+     <table width="380"  align="center" cellspacing="12px">
+       <tr>
+            <td height="24"><br>
+              Date From :</td>
+            <td height="24"><br><input type="date" name="datePertama"></td>
+            </tr>
+           <br>
+
+            <tr>
+            <td height="24"><br>
+              Date Until :</td>
+            <td height="24"><br><input type="date" name="dateKedua"></td>
+            </tr>
+
+            <tr>
+            <td height="23" colspan="2"><div align="center"><br><br>
+            &nbsp; &nbsp; &nbsp; &nbsp;
 
 
-   <h3>Treatment Record</h3><br>
- 
-   <br>
+              <input type="submit" name="SUBMIT" id="SUBMIT" value="SUBMIT">
+            </div></td>
+        </tr>
+      </table>
+    </form>
+
+     <br>
+
+
    <?php
    $result1 = mysqli_query($conn, "SELECT * FROM treatment_record WHERE patient_id  = $id order by treatment_date DESC") or die("Error Running MySQL query");
      $row2 = mysqli_fetch_assoc($result1);
-   
+
   if($row2 == false)
   {
     echo "<h5>No Previous Record<h5>";
@@ -143,11 +161,11 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
   else
   {
     $result2 = mysqli_query($conn, "SELECT * FROM treatment_record WHERE patient_id  = $id order by treatment_date DESC") or die("Error Running MySQL query");
-    while ($row1 = mysqli_fetch_assoc($result2)) 
+    while ($row1 = mysqli_fetch_assoc($result2))
     {
-    	
+
     ?>
-   <h4>Treatment Date: <?php echo $row1["treatment_date"]; ?></h4><br>
+   <h5>Treatment Date: <?php echo $row1["treatment_date"]; ?></h5><br>
    <h5>Treatment Note: <?php echo $row1["treatment_note"] ?></h5>
         <div>
             <img src="img/white.jpg" height="42"/>
@@ -164,8 +182,8 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
             <img src="img/<?php echo $row1["gg_64"]; ?>.png" id="gg_64" height="42" class="btn1 btn-success" data-id="64"/>
             <img src="img/<?php echo $row1["gg_65"]; ?>.png" id="gg_65" height="42" class="btn1 btn-success" data-id="65"/>
             <img src="img/white.jpg" height="42"/>
-            <img src="img/white.jpg" height="42"/>        
-            <img src="img/white.jpg" height="42"/>        
+            <img src="img/white.jpg" height="42"/>
+            <img src="img/white.jpg" height="42"/>
         </div>
         <div>
             <img src="img/<?php echo $row1["gg_18"]; ?>.png" id="gg_18" height="42" class="btn1 btn-success"  data-id="18"/>
@@ -183,18 +201,18 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
             <img src="img/<?php echo $row1["gg_25"]; ?>.png" id="gg_25" height="42" class="btn1 btn-success"  data-id="25"/>
             <img src="img/<?php echo $row1["gg_26"]; ?>.png" id="gg_26" height="42" class="btn1 btn-success"  data-id="26"/>
             <img src="img/<?php echo $row1["gg_27"]; ?>.png" id="gg_27" height="42" class="btn1 btn-success"  data-id="27"/>
-            <img src="img/<?php echo $row1["gg_28"]; ?>.png" id="gg_28" height="42" class="btn1 btn-success"  data-id="28"/>     
-        </div>    
+            <img src="img/<?php echo $row1["gg_28"]; ?>.png" id="gg_28" height="42" class="btn1 btn-success"  data-id="28"/>
+        </div>
         <div class="gap"><br><br><br>
-        </div>  
+        </div>
         <div>
             <img src="img/<?php echo $row1["gg_48"]; ?>.png" id="gg_48" height="42" class="btn1 btn-success"  data-id="48"/>
-            <img src="img/<?php echo $row1["gg_47"]; ?>.png" id="gg_47" height="42" class="btn1 btn-success"  data-id="47"/> 
-            <img src="img/<?php echo $row1["gg_46"]; ?>.png" id="gg_46" height="42" class="btn1 btn-success"  data-id="46"/>       
-            <img src="img/<?php echo $row1["gg_45"]; ?>.png" id="gg_45" height="42" class="btn1 btn-success"  data-id="45"/>    
-            <img src="img/<?php echo $row1["gg_44"]; ?>.png" id="gg_44" height="42" class="btn1 btn-success"  data-id="44"/> 
+            <img src="img/<?php echo $row1["gg_47"]; ?>.png" id="gg_47" height="42" class="btn1 btn-success"  data-id="47"/>
+            <img src="img/<?php echo $row1["gg_46"]; ?>.png" id="gg_46" height="42" class="btn1 btn-success"  data-id="46"/>
+            <img src="img/<?php echo $row1["gg_45"]; ?>.png" id="gg_45" height="42" class="btn1 btn-success"  data-id="45"/>
+            <img src="img/<?php echo $row1["gg_44"]; ?>.png" id="gg_44" height="42" class="btn1 btn-success"  data-id="44"/>
             <img src="img/<?php echo $row1["gg_43"]; ?>.png" id="gg_43" height="42" class="btn1 btn-success"  data-id="43"/>
-            <img src="img/<?php echo $row1["gg_42"]; ?>.png" id="gg_42" height="42" class="btn1 btn-success"  data-id="42"/>        
+            <img src="img/<?php echo $row1["gg_42"]; ?>.png" id="gg_42" height="42" class="btn1 btn-success"  data-id="42"/>
             <img src="img/<?php echo $row1["gg_41"]; ?>.png" id="gg_41" height="42" class="btn1 btn-success"  data-id="41"/>
             <img src="img/<?php echo $row1["gg_31"]; ?>.png" id="gg_31" height="42" class="btn1 btn-success"  data-id="31"/>
             <img src="img/<?php echo $row1["gg_32"]; ?>.png" id="gg_32" height="42" class="btn1 btn-success"  data-id="32"/>
@@ -203,7 +221,7 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
             <img src="img/<?php echo $row1["gg_35"]; ?>.png" id="gg_35" height="42" class="btn1 btn-success"  data-id="35"/>
             <img src="img/<?php echo $row1["gg_36"]; ?>.png" id="gg_36" height="42" class="btn1 btn-success"  data-id="36"/>
             <img src="img/<?php echo $row1["gg_37"]; ?>.png" id="gg_37" height="42" class="btn1 btn-success"  data-id="37"/>
-            <img src="img/<?php echo $row1["gg_38"]; ?>.png" id="gg_38" height="42" class="btn1 btn-success"  data-id="38"/>      
+            <img src="img/<?php echo $row1["gg_38"]; ?>.png" id="gg_38" height="42" class="btn1 btn-success"  data-id="38"/>
         </div>
         <div>
             <img src="img/white.jpg" height="42"/>
@@ -212,19 +230,19 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
             <img src="img/<?php echo $row1["gg_85"]; ?>.png" id="gg_85" height="42" class="btn1 btn-success" data-id="85"/>
             <img src="img/<?php echo $row1["gg_84"]; ?>.png" id="gg_84" height="42" class="btn1 btn-success" data-id="84"/>
             <img src="img/<?php echo $row1["gg_83"]; ?>.png" id="gg_83" height="42" class="btn1 btn-success"  data-id="83"/>
-            <img src="img/<?php echo $row1["gg_82"]; ?>.png" id="gg_82" height="42" class="btn1 btn-success"  data-id="82"/>  
-            <img src="img/<?php echo $row1["gg_81"]; ?>.png" id="gg_81" height="42" class="btn1 btn-success"  data-id="81"/>  
-            <img src="img/<?php echo $row1["gg_71"]; ?>.png" id="gg_71" height="42" class="btn1 btn-success"  data-id="71"/>  
-            <img src="img/<?php echo $row1["gg_72"]; ?>.png" id="gg_72" height="42" class="btn1 btn-success"  data-id="72"/> 
-            <img src="img/<?php echo $row1["gg_73"]; ?>.png" id="gg_73" height="42" class="btn1 btn-success"  data-id="73"/>  
-            <img src="img/<?php echo $row1["gg_74"]; ?>.png" id="gg_74" height="42" class="btn1 btn-success"  data-id="74"/>      
+            <img src="img/<?php echo $row1["gg_82"]; ?>.png" id="gg_82" height="42" class="btn1 btn-success"  data-id="82"/>
+            <img src="img/<?php echo $row1["gg_81"]; ?>.png" id="gg_81" height="42" class="btn1 btn-success"  data-id="81"/>
+            <img src="img/<?php echo $row1["gg_71"]; ?>.png" id="gg_71" height="42" class="btn1 btn-success"  data-id="71"/>
+            <img src="img/<?php echo $row1["gg_72"]; ?>.png" id="gg_72" height="42" class="btn1 btn-success"  data-id="72"/>
+            <img src="img/<?php echo $row1["gg_73"]; ?>.png" id="gg_73" height="42" class="btn1 btn-success"  data-id="73"/>
+            <img src="img/<?php echo $row1["gg_74"]; ?>.png" id="gg_74" height="42" class="btn1 btn-success"  data-id="74"/>
             <img src="img/<?php echo $row1["gg_75"]; ?>.png" id="gg_75" height="42" class="btn1 btn-success"  data-id="75"/>
             <img src="img/white.jpg" height="42"/>
-            <img src="img/white.jpg" height="42"/>        
-            <img src="img/white.jpg" height="42"/>       
+            <img src="img/white.jpg" height="42"/>
+            <img src="img/white.jpg" height="42"/>
         </div>
 
-    <br><br><br>
+    <br>
       <?php
      }
 }
@@ -269,4 +287,3 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
 </body>
 
 </html>
-

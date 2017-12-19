@@ -1,18 +1,3 @@
-<?php
-
-session_start();
-
-if(!isset($_SESSION['username']))
-{
-  echo ("<SCRIPT LANGUAGE='JavaScript'>
-  window.alert('login dulu la')
-  window.location.href='login.php';
-  </SCRIPT>");
-
-}
- ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 

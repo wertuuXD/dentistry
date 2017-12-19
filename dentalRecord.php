@@ -52,7 +52,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="appointmentListReg">Home</a>
+              <a class="nav-link js-scroll-trigger" href="appointmentListDen.php">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="listDen.php">Patient List</a>
@@ -93,19 +93,11 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
 
 <form id="borang2" name="borang2" method="post" action="dentalRecordProcess.php?id=<?php echo $id;?>">
 
- <table width="350"  align="center" cellspacing="12px">
+ <table width="450"  align="center" cellspacing="12px">
 
        <tr>
          <th colspan="2" scope="col"></th>
        </tr>
-
-
-     <tr>
-      
-         <td width="156" height="24"><br>
-           Patient Id :</td>
-         <td width="40" height="24"><br><?php echo $row["patient_id"];?></td>
-        </tr>
 
        <tr>
          <td height="24"><br>
@@ -128,20 +120,31 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
          <tr>
          <td height="24"><br>
            Date :</td>
-         <td height="24"><br><input type="date" name="treatment_date"></td>
+         <td height="24"><br><input type="date" name="treatment_date" value="<?php echo date("Y-m-d"); ?>"></td>
          </tr>
 
-         <tr>
-         <td height="24"><br>
-           Type of Tooth :</td>
-         <td height="24"><br><input type="text" name="tooth_type"></td>
-         </tr>
+        <tr>
+          <td height="24"><br>
+           Type of Treatment :</td>
+         <td height ="24"><label for="treatment_type"></label><br>
+              <select name="treatment_type" id="treatment_type">
+                    <option value="pemeriksaan">Treatment</option>
+                    <option value="tampalan">Patch</option>
+                    <option value="penskaleran">Scaling</option>
+                    <option value="cabutan">Extract</option>
+                    <option value="perubatanmulut">Oral Medicine</option>
+                    <option value="ohi">OHI</option>
+                    <option value="others">Others</option>
+            </select></td>
+          </tr>
 
          <tr>
-         <td height="24"><br>
-           Notes: </td>
-         <td height="24"><br><input type="text" name="treatment_note"></td>
-         </tr>
+        <td height="24"><br>
+          Notes :</td>
+        <td height="24"><br><label for="treatment_note"></label>
+          <textarea name="treatment_note" cols="30" rows="4"></textarea></td>
+        </tr>
+
        </table>
 
        <br>
@@ -352,13 +355,13 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
           <input type="Hidden" name="hidGGid" id="hidGGid">
         <select name="optionatas" id="optionatas" required="required">
               <option>Select</option>
-                      <option value="perlucabut">Perlu Cabut</option>
-                      <option value="telahcabut">Telah Dicabut</option>
+                      <option value="perlucabut">For Extraction</option>
+                      <option value="telahcabut">Extracted</option>
                       <option value="xdegigi">Missing</option>
-                      <option value="adatampal">Ada Tampalan</option>
-                      <option value="tampaldibuat">Tampal Dibuat</option>
-                      <option value="untuktampal">Untuk Tampal</option>
-                      <option value="tunggul">Tunggul</option>
+                      <option value="adatampal">Filled</option>
+                      <option value="tampaldibuat">Filling Done</option>
+                      <option value="untuktampal">For Filling</option>
+                      <option value="tunggul">Retained Root</option>
             </select><br><br>
         <input type="button" id="btnTreat" onclick="modal.style.display = 'none';" value="Treat">
          

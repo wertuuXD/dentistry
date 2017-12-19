@@ -41,7 +41,7 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="appointmentListDen.php">Home</a>
             </li>
-            <li class="nav-item">
+             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="listDen.php">Patient List</a>
             </li>
             <li class="nav-item">
@@ -58,19 +58,19 @@
 <br><br><br><br><br><br>
 
 
-  
+
     <h3 class="text-center">Patient List</h3>
     <hr class="star-primary">
 
  <br>
 
-<center>
-      <form id="search1" name="search1" action="searchPatient.php" method="post">
-      <input type="text" name="valueToSearch" placeholder="Patient Name">&nbsp;&nbsp;
-      <input type="submit" name="search" value="Search"><br>
+ <center>
+       <form id="search2" name="search2" action="searchPatientDen.php" method="post">
+       <input type="text" name="valueToSearch" placeholder="Patient Name">&nbsp;&nbsp;
+       <input type="submit" name="search" value="Search"><br>
 
-</form>
-</center>
+ </form>
+ </center>
 
 <br><br>
 

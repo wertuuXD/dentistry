@@ -91,10 +91,10 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
          <td height="24"><br><input name="id" value="<?php echo $row["patient_id"];?>" readonly></td>
         </tr>
 
-       <tr>
+      <tr>
          <td height="24"><br>
-           Patient Name :</td>
-         <td height="24"><br><?php echo $row["name"];?></td>
+          Name :</td>
+       <td height="24"><br><input type="text" name="name" value="<?php echo $row["name"];?>"></td>
         </tr>
         
          <tr>

@@ -65,13 +65,63 @@ if($_SESSION['username'] == '')
 
 <br><br><br><br><br><br>
 
-<h3 class="text-center">Patient Appointment List</h3>
+<h3 class="text-center">Patient-In-Queue</h3>
     <hr class="star-primary">
 
  <br>
 
+ <center>
+ <div class="box">
+ <table width="78%" class="table table-stripped table-hover table-bordered">
+
+   <?php
+   include ('connect.php');
+   date_default_timezone_set("Asia/Kuala_Lumpur");
+   $date = date("Y-m-d");
+   $page = $_SERVER['PHP_SELF'];
+   $sec = "30";
+   header("Refresh: $sec; url=$page");
+
+
+
+   $result = mysqli_query ($conn,"select * from queue q , patient_info p where p.patient_id = q.patient_id and queue_date = '$date' ORDER BY queue_number ASC") or die
+   ("Error running MySQL query");
+
+   echo "<tr><th>Queue Number</th>";
+   echo "<th>Date</th>";
+   echo "<th>Time</th>";
+   echo "<th>Patient Name</th>";
+
+   while($row = mysqli_fetch_assoc($result))
+   {
+
+     echo "<tr>";
+     echo "<td>".$row['queue_number']."</td>";
+     echo "<td>".$row['queue_date']."</td>";
+     echo "<td>".$row['queue_time']."</td>";
+     echo "<td>".$row['name']."</td>";
+   ?>
+ <?php
+ echo "</tr>";
+ }
+ echo "</table>";
+
+
+ //Freeing all memory associated with it
+ mysqli_free_result($result);
+ //Closes apecified connection
+ mysqli_close($conn);
+ ?>
+ </table>
+ </div>
+ </center>
+
+ <br>
+
 <center>
-      <form id="search1" name="search1" action="searchPatient.php" method="post">
+  <h3>Patient Appointment List</h3>
+<br>
+      <form id="search3" name="search3" action="searchAppointmentDen.php" method="post">
       <input type="text" name="valueToSearch" placeholder="Patient Name">&nbsp;&nbsp;
       <input type="submit" name="search" value="Search"><br>
 
@@ -79,9 +129,8 @@ if($_SESSION['username'] == '')
 </center>
 
 <br><br>
-
-
 <center>
+
 <div class="box">
 <table width="78%" class="table table-stripped table-hover table-bordered">
 
@@ -105,10 +154,7 @@ if($_SESSION['username'] == '')
     echo "<td>".$row['name']."</td>";
     echo "<td>".$row['ic_passno']."</td>";
     echo "<td>".$row['phoneno']."</td>";
-
   ?>
-
-
 <?php
 echo "</tr>";
 }

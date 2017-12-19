@@ -38,16 +38,16 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="appointmentListReg.php">Home</a>
+              <a class="nav-link js-scroll-trigger" href="appointmentListDen.php">Home</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="listDen.php">Patient List</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="registerPatient.php">Register Patient</a>
+              <a class="nav-link js-scroll-trigger" href="report.php">Report Statistic</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="listReg.php">Patient List</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="logout.php">Logout</a>
+              <a class="nav-link js-scroll-trigger" href="logout.php" onclick="javascript:return confirm('Are you sure you want to log out?');">Logout</a>
             </li>
           </ul>
         </div>
@@ -65,7 +65,7 @@
 <br><br>
 
 <center>
-      <form id="search1" name="search1" action="searchPatient2.php" method="post">
+      <form id="search2" name="search2" action="searchPatientDen.php" method="post">
       <input type="text" name="valueToSearch" placeholder="Patient Name">&nbsp;&nbsp;
       <input type="submit" name="search" value="Search"><br>
 
@@ -74,57 +74,56 @@
 
 <br><br>
 
-
-
 <center>
-  <table width="100%" class="table table-stripped table-hover table-bordered">
+<div class="box">
+<table width="78%" class="table table-stripped table-hover table-bordered">
 
-  <thead>
-  <tr class="text-center">
-  <th>Patient Id</th>
-  <th>Patient Name</th>
-  <th>Matric/Staff No</th>
-  <th>Faculty/Department</th>
-  <th>IC/Passport No</th>
-  </tr>
-  </thead>
-  <tbody>
+<thead>
+<tr class="text-center">
+<th>Patient Id</th>
+<th>Patient Name</th>
+<th>Matric/Staff No</th>
+<th>Faculty/Department</th>
+<th>IC/Passport No</th>
+</tr>
+</thead>
+<tbody>
 
-  <?php
-  include ('connect.php');
-  $name = $_POST['valueToSearch'];
-  $result = mysqli_query ($conn,"SELECT * FROM patient_info where name like '%$name%' ") or die
-  ("Error running MySQL query");
-
-
-  while($row = mysqli_fetch_assoc($result))
-  {
-
-  echo "<tr>";
-  echo "<td>".$row['patient_id']."</td>";
-  echo "<td>".$row['name']."</td>";
-  echo "<td>".$row['matric_staffno']."</td>";
-  echo "<td>".$row['fac_dept']."</td>";
-  echo "<td>".$row['ic_passno']."</td>";
-
-  ?>
+<?php
+include ('connect.php');
+$name = $_POST['valueToSearch'];
+$result = mysqli_query ($conn,"SELECT * FROM patient_info where name like '%$name%' ") or die
+("Error running MySQL query");
 
 
-  <td>
-    <center>
-      <a href="viewDetailsReg.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">View Details</span></button></a>
-      <a href="updateDetails.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Update Details</span></button></a>
-      <a href="appointment.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Set Appointment</span></button></a>
-      <a href="assignqno.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Assign Queue No</span></button></a>
-    </center>
-  </td>
+while($row = mysqli_fetch_assoc($result))
+{
 
-  <?php
-  echo "</tr>";
-  }
-  echo "</table>";
-  ?>
+echo "<tr>";
+echo "<td>".$row['patient_id']."</td>";
+echo "<td>".$row['name']."</td>";
+echo "<td>".$row['matric_staffno']."</td>";
+echo "<td>".$row['fac_dept']."</td>";
+echo "<td>".$row['ic_passno']."</td>";
+
+?>
+
+
+<td>
+  <center>
+    <a href="viewDetailsDen.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">View Details</span></button></a>
+    <a href="dentalRecord.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Insert Dental Record</span></button></a>
+    <a href="displayRecord.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">View Treatment Record</span></button></a>
+  </center>
+</td>
+
+<?php
+echo "</tr>";
+}
+echo "</table>";
+?>
 </div>
+</form>
 </center>
 
 

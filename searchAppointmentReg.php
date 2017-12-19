@@ -47,7 +47,7 @@
               <a class="nav-link js-scroll-trigger" href="listReg.php">Patient List</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="logout.php">Logout</a>
+              <a class="nav-link js-scroll-trigger" href="logout.php" onclick="javascript:return confirm('Are you sure you want to log out?');">Logout</a>
             </li>
           </ul>
         </div>
@@ -58,14 +58,14 @@
 
 <section id="ListRegPart">
   <div class="container">
-    <h3 class="text-center">Patient List</h3>
+    <h3 class="text-center">Patient Appointment List</h3>
     <hr class="star-primary">
 
 
 <br><br>
 
 <center>
-      <form id="search1" name="search1" action="searchPatient2.php" method="post">
+      <form id="search4" name="search4" action="searchAppointmentReg.php" method="post">
       <input type="text" name="valueToSearch" placeholder="Patient Name">&nbsp;&nbsp;
       <input type="submit" name="search" value="Search"><br>
 
@@ -77,54 +77,45 @@
 
 
 <center>
-  <table width="100%" class="table table-stripped table-hover table-bordered">
-
-  <thead>
-  <tr class="text-center">
-  <th>Patient Id</th>
-  <th>Patient Name</th>
-  <th>Matric/Staff No</th>
-  <th>Faculty/Department</th>
-  <th>IC/Passport No</th>
-  </tr>
-  </thead>
-  <tbody>
-
-  <?php
-  include ('connect.php');
-  $name = $_POST['valueToSearch'];
-  $result = mysqli_query ($conn,"SELECT * FROM patient_info where name like '%$name%' ") or die
-  ("Error running MySQL query");
 
 
-  while($row = mysqli_fetch_assoc($result))
-  {
-
-  echo "<tr>";
-  echo "<td>".$row['patient_id']."</td>";
-  echo "<td>".$row['name']."</td>";
-  echo "<td>".$row['matric_staffno']."</td>";
-  echo "<td>".$row['fac_dept']."</td>";
-  echo "<td>".$row['ic_passno']."</td>";
-
-  ?>
+<form id="searchAppReg" name="searchAppReg" action="searchAppointmentReg.php" method="post">
 
 
-  <td>
-    <center>
-      <a href="viewDetailsReg.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">View Details</span></button></a>
-      <a href="updateDetails.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Update Details</span></button></a>
-      <a href="appointment.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Set Appointment</span></button></a>
-      <a href="assignqno.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Assign Queue No</span></button></a>
-    </center>
-  </td>
+<?php
+$link=mysqli_connect ("localhost", "root", "abcd1234");
+mysqli_select_db ($link, "dental");
+?>
 
-  <?php
-  echo "</tr>";
-  }
-  echo "</table>";
-  ?>
-</div>
+<table class="table table-stripped table-hover table-bordered">
+
+<?php
+if (isset ($_POST["search"]))
+{
+$res=mysqli_query($link,"select * from appointment where name='$_POST[valueToSearch]'");
+        echo "<tr><th>Appointment Date</th>";
+        echo "<th>Appointment Time</th>";
+        echo "<th>Patient Name</th>";
+
+
+ while($row = mysqli_fetch_assoc($res))
+    {
+
+      echo "<tr>";
+      echo "<td>".$row['appointment_date']."</td>";
+      echo "<td>".$row['appointment_time']."</td>";
+      echo "<td>".$row['name']."</td>";
+
+		echo "</tr>";
+	}
+
+echo "</table>";
+
+}
+
+?>
+
+
 </center>
 
 

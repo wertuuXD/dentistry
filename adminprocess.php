@@ -7,7 +7,7 @@
     $password = $_POST['password'] ;
     $level = $_POST['level'] ;
 
-    $query = mysqli_query($conn, "INSERT INTO user (username,password,level) VALUES ('$username','$password','$level')") or die(mysqli_error($conn)) ;
+    $query = mysqli_query($conn, "INSERT INTO user (username,password,level) VALUES ('$username',md5('$password'),'$level')") or die(mysqli_error($conn)) ;
 
 	    if($query)
 	    { 

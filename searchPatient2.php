@@ -27,6 +27,7 @@
 
   <body id="page-top">
 
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
@@ -47,22 +48,21 @@
               <a class="nav-link js-scroll-trigger" href="listReg.php">Patient List</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="logout.php">Logout</a>
+              <a class="nav-link js-scroll-trigger" href="logout.php" onclick="javascript:return confirm('Are you sure you want to log out?');">Logout</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
-<br><br>
+<br><br><br><br><br><br>
 
-<section id="ListRegPart">
-  <div class="container">
+
+
     <h3 class="text-center">Patient List</h3>
     <hr class="star-primary">
 
-
-<br><br>
+ <br>
 
 <center>
       <form id="search1" name="search1" action="searchPatient2.php" method="post">
@@ -75,60 +75,69 @@
 <br><br>
 
 
-
 <center>
-  <table width="100%" class="table table-stripped table-hover table-bordered">
 
-  <thead>
-  <tr class="text-center">
-  <th>Patient Id</th>
-  <th>Patient Name</th>
-  <th>Matric/Staff No</th>
-  <th>Faculty/Department</th>
-  <th>IC/Passport No</th>
-  </tr>
-  </thead>
-  <tbody>
+<div class="box">
+<table width="78%" class="table table-stripped table-hover table-bordered">
 
-  <?php
-  include ('connect.php');
-  $name = $_POST['valueToSearch'];
-  $result = mysqli_query ($conn,"SELECT * FROM patient_info where name like '%$name%' ") or die
-  ("Error running MySQL query");
+<thead>
+<tr class="text-center">
+<th>Patient Id</th>
+<th>Patient Name</th>
+<th>Matric/Staff No</th>
+<th>Faculty/Department</th>
+<th>IC/Passport No</th>
+</tr>
+</thead>
+<tbody>
 
-
-  while($row = mysqli_fetch_assoc($result))
-  {
-
-  echo "<tr>";
-  echo "<td>".$row['patient_id']."</td>";
-  echo "<td>".$row['name']."</td>";
-  echo "<td>".$row['matric_staffno']."</td>";
-  echo "<td>".$row['fac_dept']."</td>";
-  echo "<td>".$row['ic_passno']."</td>";
-
-  ?>
+<?php
+include ('connect.php');
+$name = $_POST['valueToSearch'];
+$result = mysqli_query ($conn,"SELECT * FROM patient_info where name like '%$name%' ") or die
+("Error running MySQL query");
 
 
-  <td>
-    <center>
-      <a href="viewDetailsReg.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">View Details</span></button></a>
-      <a href="updateDetails.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Update Details</span></button></a>
-      <a href="appointment.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Set Appointment</span></button></a>
-      <a href="assignqno.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Assign Queue No</span></button></a>
-    </center>
-  </td>
+while($row = mysqli_fetch_assoc($result))
+{
 
-  <?php
-  echo "</tr>";
-  }
-  echo "</table>";
-  ?>
+echo "<tr>";
+echo "<td>".$row['patient_id']."</td>";
+echo "<td>".$row['name']."</td>";
+echo "<td>".$row['matric_staffno']."</td>";
+echo "<td>".$row['fac_dept']."</td>";
+echo "<td>".$row['ic_passno']."</td>";
+
+?>
+
+
+<td>
+  <center>
+    <a href="viewDetailsReg.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">View Details</span></button></a>
+    <a href="updateDetails.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Update Details</span></button></a>
+    <a href="appointment.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Appointment</span></button></a>
+    <a href="assignqno.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Queue No</span></button></a>
+  </center>
+</td>
+
+<?php
+echo "</tr>";
+}
+echo "</table>";
+
+
+//Freeing all memory associated with it
+mysqli_free_result($result);
+//Closes apecified connection
+mysqli_close($conn);
+?>
+</tbody>
+</table>
 </div>
 </center>
 
 
-<br><br>
+
 
 
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->

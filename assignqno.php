@@ -38,13 +38,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="appointmentListDen.php">Home</a>
-            </li>
-             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="listDen.php">Patient List</a>
+              <a class="nav-link js-scroll-trigger" href="appointmentListReg.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="report.php">Report Statistic</a>
+              <a class="nav-link js-scroll-trigger" href="registerPatient.php">Register Patient</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="listReg.php">Patient List</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="logout.php" onclick="javascript:return confirm('Are you sure you want to log out?');">Logout</a>
@@ -58,8 +58,9 @@
 
 <section id="appointmentPart">
   <div class="container">
-    <h3 class="text-center">Patient Information</h3>
+    <h3 class="text-center">Patient Record</h3>
     <hr class="star-primary">
+
 
 <div align="center">
 <form name="borang2" method="post" action="updateDetails.php">
@@ -74,21 +75,13 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
 ?>
 </form>
 
-<form id="borang2" name="borang2" method="post" action="">
+<form id="borang2" name="borang2" method="post" action="updateDetails2.php">
 
  <table width="380"  align="center" cellspacing="12px">
 
        <tr>
          <th colspan="2" scope="col"></th>
        </tr>
-
-
-     <tr>
-
-         <td width="196" height="24"><br>
-           Patient Id :</td>
-         <td width="229" height="24"><br><?php echo $row["patient_id"];?></td>
-        </tr>
 
        <tr>
          <td height="24"><br>
@@ -102,7 +95,7 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
         <td height="24"><br><?php echo $row["matric_staffno"];?></td>
         </tr>
 
-         <tr>
+        <tr>
          <td height="24"><br>
            Faculty/Department :</td>
          <td height="24"><br><?php echo $row["fac_dept"];?></td>
@@ -114,117 +107,84 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
          <td height="24"><br><?php echo $row["ic_passno"];?></td>
          </tr>
 
-         <tr>
-         <td height="24"><br>
-           Position :</td>
-         <td height="24"><br><?php echo $row["position"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-          Gender :</td>
-         <td height="24"><br><?php echo $row["gender"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-          Citizen :</td>
-         <td height="24"><br><?php echo $row["citizen"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-           Phone No :</td>
-         <td height="24"><br><?php echo $row["phoneno"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-           Address :</td>
-         <td height="24"><br><?php echo $row["address"];?></td>
-         </tr>
-
-
-         <tr>
-         <td height="24"><br>
-          </td>
-         <td height="24"><br></td>
-         </tr>
-
-
-
-          <div class="box">
-          <table width="80%" class="table table-stripped table-hover table-bordered">
-          <center>
-          <thead>
-          <tr class="text-center">
-          <th>Allergies</th>
-          <th>Asthma</th>
-          <th>Diabetes</th>
-          <th>Hypertension</th>
-          <th>Blood Dyscrasias</th>
-          <th>Heart Disease</th>
-          <th>Congenital Heart</th>
-          <th>Other Disease</th>
-          <th>Medication Taken</th>
-
-          </tr>
-          </thead>
-          <tbody>
-
-          <?php
-          include ('connect.php');
-          $id = $_GET['id'];
-          $result = mysqli_query ($conn,"SELECT * FROM medical_history where patient_id = $id") or die
-          ("Error running MySQL query");
-
-
-          while($row = mysqli_fetch_assoc($result))
-          {
-
-          echo "<tr>";
-          echo "<td>".$row['allergies']."</td>";
-          echo "<td>".$row['asthma']."</td>";
-          echo "<td>".$row['diabetes']."</td>";
-          echo "<td>".$row['hypertension']."</td>";
-          echo "<td>".$row['blooddyscrasias']."</td>";
-          echo "<td>".$row['heartdisease']."</td>";
-          echo "<td>".$row['congenitalheart']."</td>";
-          echo "<td>".$row['otherdisease']."</td>";
-          echo "<td>".$row['medictaken']."</td>";
-
-
-          ?>
-
-          <?php
-          echo "</tr>";
-          }
-          echo "</table>";
-
-
-          //Freeing all memory associated with it
-          mysqli_free_result($result);
-          //Closes apecified connection
-          mysqli_close($conn);
-          ?>
-          </tbody>
-          </center>
-          </table>
-          </div>
-
-
 
        <tr>
          <td height="23" colspan="2"><div align="center"><br><br>
          &nbsp; &nbsp; &nbsp; &nbsp;
 
-           <input type="button" a href="listReg.php" onclick="history.back();" value="BACK" />
+
          </div></td>
          </tr>
      </table>
 
    </form>
+   <br>
 
+   <h3>Assign Queue Number</h3>
+
+   <form id="searchDate" name="searchDate" action="addq.php" method="post">
+     <table width="380"  align="center" cellspacing="12px">
+       <tr>
+            <td height="24"><br>
+              Date :</td>
+              <?php
+              date_default_timezone_set("Asia/Kuala_Lumpur");
+               ?>
+            <td height="24"><br><input type="input" disabled value="<?php echo date("Y-m-d");?>" name="dateQueue"></td>
+            <input type="input" name="pid" hidden value="<?php echo $id;?>" >
+            </tr>
+            <tr>
+                 <td height="24"><br>
+                   Time:</td>
+                   <?php
+                   date_default_timezone_set("Asia/Kuala_Lumpur");
+                    ?>
+                 <td height="24"><br><input type="time"  value="" name="atime"></td>
+
+                 </tr>
+           <br>
+
+            <tr>
+            <td height="24"><br>
+              Queue Number :</td>
+            <td height="24"><br>
+              <select name="qq" >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+
+
+              </select>
+
+
+
+
+            </td>
+            </tr>
+
+            <tr>
+            <td height="23" colspan="2"><div align="center"><br><br>
+            &nbsp; &nbsp; &nbsp; &nbsp;
+
+
+              <input type="submit" name="SUBMIT" id="SUBMIT" value="SUBMIT">
+            </div></td>
+        </tr>
+      </table>
+    </form>
+
+     <br>
 </div>
 
 </div>

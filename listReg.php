@@ -58,14 +58,14 @@
 <br><br><br><br><br><br>
 
 
-  
+
     <h3 class="text-center">Patient List</h3>
     <hr class="star-primary">
 
  <br>
 
 <center>
-      <form id="search1" name="search1" action="searchPatient.php" method="post">
+      <form id="search1" name="search1" action="searchPatient2.php" method="post">
       <input type="text" name="valueToSearch" placeholder="Patient Name">&nbsp;&nbsp;
       <input type="submit" name="search" value="Search"><br>
 
@@ -78,7 +78,7 @@
 <center>
 
 <div class="box">
-<table width="78%" class="table table-stripped table-hover table-bordered">
+<table width="100%" class="table table-stripped table-hover table-bordered">
 
 <thead>
 <tr class="text-center">
@@ -93,6 +93,7 @@
 
 <?php
 include ('connect.php');
+
 $result = mysqli_query ($conn,"SELECT * FROM patient_info") or die
 ("Error running MySQL query");
 
@@ -114,7 +115,8 @@ echo "<td>".$row['ic_passno']."</td>";
   <center>
     <a href="viewDetailsReg.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">View Details</span></button></a>
     <a href="updateDetails.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Update Details</span></button></a>
-    <a href="appointment.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Set Appointment</span></button></a>
+    <a href="appointment.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Appointment</span></button></a>
+    <a href="assignqno.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Queue No</span></button></a>
   </center>
 </td>
 
