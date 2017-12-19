@@ -1,5 +1,4 @@
 <?php
-
 $conn=mysqli_connect("localhost", "root", "", "dental");
 // Check connection
 if (mysqli_connect_errno())
