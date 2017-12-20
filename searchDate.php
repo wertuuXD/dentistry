@@ -128,7 +128,7 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = '$i
 
 
 <?php
-$link=mysqli_connect ("localhost", "root", "abcd1234");
+$link=mysqli_connect ("localhost", "root", "");
 mysqli_select_db ($link, "dental");
 
 if (isset($_POST["SUBMIT"]))
@@ -141,6 +141,7 @@ while($row1 = mysqli_fetch_assoc($res)){
 ?>
 <br>
 <h5>Treatment Date: <?php echo $row1["treatment_date"]; ?></h5><br>
+<h5>Type of Treatment: <?php echo $row1["treatment_type"]; ?></h5><br>
 <h5>Treatment Note: <?php echo $row1["treatment_note"] ?></h5>
 <div>
     <img src="img/white.jpg" height="42"/>

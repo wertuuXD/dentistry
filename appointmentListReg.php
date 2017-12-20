@@ -80,8 +80,8 @@ if(!isset($_SESSION['username']))
    date_default_timezone_set("Asia/Kuala_Lumpur");
    $date = date("Y-m-d");
    $page = $_SERVER['PHP_SELF'];
-   $sec = "5";
-   //header("Refresh: $sec; url=$page");
+   $sec = "20";
+   header("Refresh: $sec; url=$page");
 
 
 

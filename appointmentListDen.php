@@ -101,6 +101,15 @@ if($_SESSION['username'] == '')
      echo "<td>".$row['queue_time']."</td>";
      echo "<td>".$row['name']."</td>";
    ?>
+
+   <td>
+  <center>
+    <a href="viewDetailsDen.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">View Details</span></button></a>
+    <a href="dentalRecord.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">Insert Dental Record</span></button></a>
+    <a href="displayRecord.php?id=<?php echo $row['patient_id'] ?>"><button type="button" class="btn"><span style="cursor:pointer">View Treatment Record</span></button></a>
+  </center>
+</td>
+
  <?php
  echo "</tr>";
  }

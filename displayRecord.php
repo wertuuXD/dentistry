@@ -166,6 +166,7 @@ $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id
 
     ?>
    <h5>Treatment Date: <?php echo $row1["treatment_date"]; ?></h5><br>
+   <h5>Type of Treatment: <?php echo $row1["treatment_type"]; ?></h5><br>
    <h5>Treatment Note: <?php echo $row1["treatment_note"] ?></h5>
         <div>
             <img src="img/white.jpg" height="42"/>
