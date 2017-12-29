@@ -9,13 +9,15 @@
 	$tm = $_POST['time'];
 
 
-     mysqli_query
-    ($conn, "INSERT INTO appointment (patient_id,name,appointment_date,appointment_time)
-    VALUES ('$id','$name','$dt','$tm')");
-    echo "<script>alert('The data successfully inserted');";
-     echo "window.location.href ='listReg.php';</script>";
+    $stmt = $conn->prepare("INSERT INTO appointment (patient_id,name,appointment_date,appointment_time)  VALUES (?,?,?,?)");
+    $stmt->bind_param("isss", $id, $name, $dt, $tm);
 
+    $stmt->execute() ;
+
+     echo "<script>alert('The data successfully inserted');";
+     echo "window.location.href = 'listReg.php';</script>";
+
+    $stmt->close();
+    $conn->close();
 	}
-
-  mysqli_close($conn);
  	  ?>

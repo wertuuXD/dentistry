@@ -61,16 +61,21 @@
 	include ("connect.php");
 	if(isset($_POST['submit']))
 	{
-		$nm = $_POST['name'];
-		$matr = $_POST['matric_staffno'];
-		$fac = $_POST['fac_dept'];
-		$ic = $_POST['ic_passno'];
-		$posit = $_POST['position'];
-		$gdr = $_POST['gender'];
-		$ctz = $_POST['citizen'];
-		$tel = $_POST['phoneno'];
-		$adrs = $_POST['address'];
-		$cons = $_POST['patient_consent'];
+    //check connection
+    if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+    }
+
+    $nm = $_POST['name'];
+    $matr = $_POST['matric_staffno'];
+    $fac = $_POST['fac_dept'];
+    $ic = $_POST['ic_passno'];
+    $posit = $_POST['position'];
+    $gdr = $_POST['gender'];
+    $ctz = $_POST['citizen'];
+    $tel = $_POST['phoneno'];
+    $adrs = $_POST['address'];
+    $cons = $_POST['patient_consent'];
     $allergies = $_POST['allergies'];
     $asthma = $_POST['asthma'];
     $diabetes = $_POST['diabetes'];
@@ -82,23 +87,58 @@
     $medtaken = $_POST['medicationtaken'];
 
 
-		mysqli_query
-		($conn, "INSERT INTO patient_info (name,matric_staffno,fac_dept,ic_passno,position,	gender,citizen,phoneno,address,patient_consent)
-      	 VALUES ('$nm','$matr','$fac','$ic','$posit','$gdr','$ctz','$tel','$adrs','$cons')") or die ( mysqli_error($conn));
+    //prepare and bind
+    $stmt = $conn->prepare("INSERT INTO patient_info(name,matric_staffno,fac_dept,ic_passno,position, gender,citizen,phoneno,address,patient_consent)
+         VALUES (?,?,?,?,?,?,?,?,?,?)") ;
+    $stmt->bind_param("ssssssssss", $nm, $matr, $fac, $ic, $posit, $gdr, $ctz, $tel, $adrs, $cons);
+
+    $stmt->execute() ;
+
+     echo "<script>alert('The data successfully inserted');";
+     echo "window.location.href = 'listReg.php';</script>";
+
+    $stmt->close();
 
 
-         $result2 = mysqli_query ($conn,"select max(patient_id) from patient_info");
-         $row2 = mysqli_fetch_array($result2);
-         $pid = $row2[0];
+
+      $result2 = mysqli_query ($conn,"select max(patient_id) from patient_info");
+      $row2 = mysqli_fetch_array($result2);
+      $pid = $row2[0];
+
+    $stmt1 = $conn->prepare("INSERT INTO medical_history (allergies,asthma,diabetes,hypertension,blooddyscrasias,heartdisease,congenitalheart,otherdisease,medictaken,patient_id) VALUES (?,?,?,?,?,?,?,?,?,?)") ;
+    $stmt1->bind_param("sssssssssi", $allergies, $asthma, $diabetes, $hypertension, $blood, $heart, $congheart, $other, $medtaken, $pid);
+
+    $stmt1->execute() ;
+
+     echo "<script>alert('The data successfully inserted');";
+     echo "window.location.href = 'listReg.php';</script>";
+
+    $stmt1->close();
+    $conn->close();
 
 
 
 
-     mysqli_query
-    ($conn, "INSERT INTO medical_history (allergies,asthma,diabetes,hypertension,blooddyscrasias,heartdisease,congenitalheart,otherdisease,medictaken,patient_id)
-    VALUES ('$allergies','$asthma','$diabetes','$hypertension','$blood','$heart','$congheart','$other','$medtaken' ,'$pid')") or die  ( mysqli_error($conn));
-    echo "<script>alert('The data successfully inserted');";
-     echo "window.location.href = 'registerPatient.php';</script>";
+
+		
+
+		// mysqli_query
+		// ($conn, "INSERT INTO patient_info (name,matric_staffno,fac_dept,ic_passno,position,	gender,citizen,phoneno,address,patient_consent)
+  //     	 VALUES ('$nm','$matr','$fac','$ic','$posit','$gdr','$ctz','$tel','$adrs','$cons')") or die ( mysqli_error($conn));
+
+
+  //        $result2 = mysqli_query ($conn,"select max(patient_id) from patient_info");
+  //        $row2 = mysqli_fetch_array($result2);
+  //        $pid = $row2[0];
+
+
+
+
+  //    mysqli_query
+  //   ($conn, "INSERT INTO medical_history (allergies,asthma,diabetes,hypertension,blooddyscrasias,heartdisease,congenitalheart,otherdisease,medictaken,patient_id)
+  //   VALUES ('$allergies','$asthma','$diabetes','$hypertension','$blood','$heart','$congheart','$other','$medtaken' ,'$pid')") or die  ( mysqli_error($conn));
+  //   echo "<script>alert('The data successfully inserted');";
+  //    echo "window.location.href = 'registerPatient.php';</script>";
 
 	}
 ?>

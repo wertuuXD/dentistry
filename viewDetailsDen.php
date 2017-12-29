@@ -67,9 +67,16 @@
 <?php
 include ('connect.php');
 $id = $_GET['id'];
-$result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id") or die
-("Error running MySQL query");
-   $row = mysqli_fetch_assoc($result);
+
+  $stmt = $mysqli->prepare("SELECT * FROM patient_info WHERE patient_id = ?");
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+  $result=$stmt->get_result();
+   $row = $result->fetch_assoc();
+
+  // $result = mysqli_query ($conn,"SELECT * FROM patient_info where patient_id = $id") or die
+  // ("Error running MySQL query");
+  //    $row = mysqli_fetch_assoc($result);
 
 ?>
 </form>

@@ -66,11 +66,25 @@ $id = $_SESSION['id'];
             $gg_75 = $_POST['gg_75'] ;
         	
 
-         mysqli_query
-        ($conn, "INSERT INTO treatment_record (patient_id,treatment_date,treatment_type,treatment_note,gg_55,gg_54,gg_53,gg_52,gg_51,gg_61,gg_62,gg_63,gg_64,gg_65,gg_18,gg_17,gg_16,gg_15,gg_14,gg_13,gg_12,gg_11,gg_21,gg_22,gg_23,gg_24,gg_25,gg_26,gg_27,gg_28,gg_48,gg_47,gg_46,gg_45,gg_44,gg_43,gg_42,gg_41,gg_31,gg_32,gg_33,gg_34,gg_35,gg_36,gg_37,gg_38,gg_85,gg_84,gg_83,gg_82,gg_81,gg_71,gg_72,gg_73,gg_74,gg_75)
-         VALUES ($patient_id,'$dtldate','$treat','$notes','$gg_55','$gg_54','$gg_53','$gg_52','$gg_51','$gg_61','$gg_62','$gg_63','$gg_64','$gg_65','$gg_18','$gg_17','$gg_16','$gg_15','$gg_14','$gg_13','$gg_12','$gg_11','$gg_21','$gg_22','$gg_23','$gg_24','$gg_25','$gg_26','$gg_27','$gg_28','$gg_48','$gg_47','$gg_46','$gg_45','$gg_44','$gg_43','$gg_42','$gg_41','$gg_31','$gg_32','$gg_33','$gg_34','$gg_35','$gg_36','$gg_37','$gg_38','$gg_85','$gg_84','$gg_83','$gg_82','$gg_81','$gg_71','$gg_72','$gg_73','$gg_74','$gg_75')") or die ( mysqli_error($conn));  //36
-         echo "<script>alert('The data successfully inserted');";
-         echo "window.location.href = 'dentalRecord.php?id=$id';</script>";
+
+             $stmt = $conn->prepare("INSERT INTO treatment_record (patient_id,treatment_date,treatment_type,treatment_note,gg_55,gg_54,gg_53,gg_52,gg_51,gg_61,gg_62,gg_63,gg_64,gg_65,gg_18,gg_17,gg_16,gg_15,gg_14,gg_13,gg_12,gg_11,gg_21,gg_22,gg_23,gg_24,gg_25,gg_26,gg_27,gg_28,gg_48,gg_47,gg_46,gg_45,gg_44,gg_43,gg_42,gg_41,gg_31,gg_32,gg_33,gg_34,gg_35,gg_36,gg_37,gg_38,gg_85,gg_84,gg_83,gg_82,gg_81,gg_71,gg_72,gg_73,gg_74,gg_75)
+         VALUES  (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $stmt->bind_param("isssssssssssssssssssssssssssssssssssssssssssssssssssssss", $patient_id, $dtldate, $treat, $notes,$gg_55,$gg_54,$gg_53,$gg_52,$gg_51,$gg_61,$gg_62,$gg_63,$gg_64,$gg_65,$gg_18,$gg_17,$gg_16,$gg_15,$gg_14,$gg_13,$gg_12,$gg_11,$gg_21,$gg_22,$gg_23,$gg_24,$gg_25,$gg_26,$gg_27,$gg_28,$gg_48,$gg_47,$gg_46,$gg_45,$gg_44,$gg_43,$gg_42,$gg_41,$gg_31,$gg_32,$gg_33,$gg_34,$gg_35,$gg_36,$gg_37,$gg_38,$gg_85,$gg_84,$gg_83,$gg_82,$gg_81,$gg_71,$gg_72,$gg_73,$gg_74,$gg_75);
+
+            $stmt->execute() ;
+
+             echo "<script>alert('The data successfully inserted');";
+             echo "window.location.href = 'dentalRecord.php?id=$id';</script>";
+
+            $stmt->close();
+            $conn->close();
+
+
+        //  mysqli_query
+        // ($conn, "INSERT INTO treatment_record (patient_id,treatment_date,treatment_type,treatment_note,gg_55,gg_54,gg_53,gg_52,gg_51,gg_61,gg_62,gg_63,gg_64,gg_65,gg_18,gg_17,gg_16,gg_15,gg_14,gg_13,gg_12,gg_11,gg_21,gg_22,gg_23,gg_24,gg_25,gg_26,gg_27,gg_28,gg_48,gg_47,gg_46,gg_45,gg_44,gg_43,gg_42,gg_41,gg_31,gg_32,gg_33,gg_34,gg_35,gg_36,gg_37,gg_38,gg_85,gg_84,gg_83,gg_82,gg_81,gg_71,gg_72,gg_73,gg_74,gg_75)
+        //  VALUES ($patient_id,'$dtldate','$treat','$notes','$gg_55','$gg_54','$gg_53','$gg_52','$gg_51','$gg_61','$gg_62','$gg_63','$gg_64','$gg_65','$gg_18','$gg_17','$gg_16','$gg_15','$gg_14','$gg_13','$gg_12','$gg_11','$gg_21','$gg_22','$gg_23','$gg_24','$gg_25','$gg_26','$gg_27','$gg_28','$gg_48','$gg_47','$gg_46','$gg_45','$gg_44','$gg_43','$gg_42','$gg_41','$gg_31','$gg_32','$gg_33','$gg_34','$gg_35','$gg_36','$gg_37','$gg_38','$gg_85','$gg_84','$gg_83','$gg_82','$gg_81','$gg_71','$gg_72','$gg_73','$gg_74','$gg_75')") or die ( mysqli_error($conn));  //36
+        //  echo "<script>alert('The data successfully inserted');";
+        //  echo "window.location.href = 'dentalRecord.php?id=$id';</script>";
 
         }
 

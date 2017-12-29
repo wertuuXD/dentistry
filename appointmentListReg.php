@@ -84,32 +84,40 @@ if(!isset($_SESSION['username']))
    header("Refresh: $sec; url=$page");
 
 
+  $stmt = $mysqli->prepare("SELECT * FROM queue q, patient_info p WHERE p.patient_id = q.patient_id and queue_date = ? ORDER BY queue_number ASC");
+  $stmt->bind_param("s", $date);
+  $stmt->execute();
+  $result=$stmt->get_result();
+  //fetching result would go here, but will be covered later
+  //$stmt->close();
 
-   $result = mysqli_query ($conn,"select * from queue q , patient_info p where p.patient_id = q.patient_id and queue_date = '$date' ORDER BY queue_number ASC") or die
-   ("Error running MySQL query");
 
-   echo "<tr><th>Queue Number</th>";
-   echo "<th>Date</th>";
-   echo "<th>Time</th>";
-   echo "<th>Patient Name</th>";
 
-   while($row = mysqli_fetch_assoc($result))
-   {
+     // $result = mysqli_query ($conn,"select * from queue q , patient_info p where p.patient_id = q.patient_id and queue_date = '$date' ORDER BY queue_number ASC") or die
+     // ("Error running MySQL query");
 
-     echo "<tr>";
-     echo "<td>".$row['queue_number']."</td>";
-     echo "<td>".$row['queue_date']."</td>";
-     echo "<td>".$row['queue_time']."</td>";
-     echo "<td>".$row['name']."</td>";
-   ?>
- <?php
- echo "</tr>";
- }
- echo "</table>";
+     echo "<tr><th>Queue Number</th>";
+     echo "<th>Date</th>";
+     echo "<th>Time</th>";
+     echo "<th>Patient Name</th>";
+
+     while($row = $result->fetch_assoc())
+     {
+
+       echo "<tr>";
+       echo "<td>".$row['queue_number']."</td>";
+       echo "<td>".$row['queue_date']."</td>";
+       echo "<td>".$row['queue_time']."</td>";
+       echo "<td>".$row['name']."</td>";
+     ?>
+   <?php
+   echo "</tr>";
+   }
+   echo "</table>";
 
 
  //Freeing all memory associated with it
- mysqli_free_result($result);
+ //mysqli_free_result($stmt);
  //Closes apecified connection
  mysqli_close($conn);
  ?>

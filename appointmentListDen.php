@@ -84,15 +84,17 @@ if($_SESSION['username'] == '')
 
 
 
-   $result = mysqli_query ($conn,"select * from queue q , patient_info p where p.patient_id = q.patient_id and queue_date = '$date' ORDER BY queue_number ASC") or die
-   ("Error running MySQL query");
+  $stmt = $mysqli->prepare("SELECT * FROM queue q, patient_info p WHERE p.patient_id = q.patient_id and queue_date = ? ORDER BY queue_number ASC");
+  $stmt->bind_param("s", $date);
+  $stmt->execute();
+  $result=$stmt->get_result();
 
    echo "<tr><th>Queue Number</th>";
    echo "<th>Date</th>";
    echo "<th>Time</th>";
    echo "<th>Patient Name</th>";
 
-   while($row = mysqli_fetch_assoc($result))
+   while($row = $result->fetch_assoc())
    {
 
      echo "<tr>";
@@ -117,7 +119,7 @@ if($_SESSION['username'] == '')
 
 
  //Freeing all memory associated with it
- mysqli_free_result($result);
+// mysqli_free_result($result);
  //Closes apecified connection
  mysqli_close($conn);
  ?>

@@ -9,23 +9,27 @@ if (isset($_POST['login']))
     $password = $_POST['password'];
     $hashed_password = md5($password);
 
-    $sql = "SELECT * FROM `user` WHERE username = '".$username."' and password = '".$hashed_password."' ";
-    $query = mysqli_query($conn,$sql) ;
-    $result = mysqli_fetch_assoc($query) ;
+
+    $stmt = $mysqli->prepare("SELECT * FROM `user` WHERE username = ? and password = ? ");
+    $stmt->bind_param("ss", $username,$hashed_password);
+    $stmt->execute();
+    $result = $stmt->get_result() ;
+    $row = $result->fetch_assoc();
+
     
     if ($result)
     {
         session_start();
         $_SESSION['username'] = $_POST['username'];
-        if($result['level'] == "registrar")
+        if($row['level'] == "registrar")
         {
             header("Location:appointmentListReg.php?error=0"); 
         }
-        else if ($result['level'] == "dentist") 
+        else if ($row['level'] == "dentist") 
         {
             header("Location:appointmentListDen.php?error=0");
         }
-        else if ($result['level'] == "admin")
+        else if ($row['level'] == "admin")
         {
             header("Location:admin.php?error=0");
         }
