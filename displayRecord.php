@@ -46,6 +46,9 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="report.php">Report Statistic</a>
             </li>
+             <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="profile.php">Profile</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="logout.php" onclick="javascript:return confirm('Are you sure you want to log out?');">Logout</a>
             </li>

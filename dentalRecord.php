@@ -60,6 +60,9 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="report.php">Report Statistic</a>
             </li>
+             <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="profile.php">Profile</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="logout.php" onclick="javascript:return confirm('Are you sure you want to log out?');">Logout</a>
             </li>
@@ -131,7 +134,7 @@ $id = $_SESSION['id'];
          <td height ="24"><label for="treatment_type"></label><br>
               <select name="treatment_type" id="treatment_type">
                     <option value="pemeriksaan">Treatment</option>
-                    <option value="tampalan">Patch</option>
+                    <option value="tampalan">Filling</option>
                     <option value="penskaleran">Scaling</option>
                     <option value="cabutan">Extract</option>
                     <option value="perubatanmulut">Oral Medicine</option>
