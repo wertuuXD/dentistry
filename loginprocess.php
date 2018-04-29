@@ -23,11 +23,14 @@ if (isset($_POST['login']))
         $_SESSION['username'] = $_POST['username'];
         if($row['level'] == "registrar")
         {
-            header("Location:appointmentListReg.php?error=0"); 
+            header("Location:appointmentListReg.php?error=0");
+            $_SESSION['RegUser'] = $_POST['username'];
+
         }
         else if ($row['level'] == "dentist") 
         {
             header("Location:appointmentListDen.php?error=0");
+             $_SESSION['DentUser'] = $_POST['username'];
         }
         else if ($row['level'] == "admin")
         {

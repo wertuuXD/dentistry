@@ -28,7 +28,7 @@ if(!isset($_SESSION['username']))
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="profile.php">Staff Management System</a>
+    <a class="navbar-brand" href="profilereg.php">Staff Management System</a>
     <!-- <a class="navbar-brand" href="profile.php">Start Bootstrap</a> -->
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -36,7 +36,7 @@ if(!isset($_SESSION['username']))
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Profile">
-          <a class="nav-link" href="profile.php">
+          <a class="nav-link" href="profilereg.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Profile</span>
           </a>
@@ -45,6 +45,12 @@ if(!isset($_SESSION['username']))
           <a class="nav-link" href="appointmentListReg.php">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">UTeM Dental System</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="applycuti.php">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Tables</span>
           </a>
         </li>
       </ul>
@@ -64,43 +70,33 @@ if(!isset($_SESSION['username']))
     </div>
   </nav>
 
-  <?php
-    //fetch data from database
-    include ('connect.php');
-    $sql = "SELECT * FROM profile" ;
-    $result = mysqli_query($conn,$sql) or die("Error running MySQL query");
-    $row = mysqli_fetch_assoc($result);
-
-?>
-  ?>
-
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <div class="row">
         <div class="col-12">
-          <h1>Profile</h1>[<a href="editprofile.php">Edit</a>]
-          <form id="borang2" name="borang2" method="post" action="">
+          <h1>Profile</h1>
+          <form id="form" name="form" method="post" action="editprofileprocess.php">
 
           <ol class="breadcrumb">
             <b style="color: #280e11; font-family: Verdana">Pamer Maklumat Personal</b>
           </ol>
 
-          <img src="s" align="left">
+          <img src="" align="left">
        <tr>
          <td height="24"><br>
            Nama Staff :</td>
-         <td height="24"><?php echo $row["name"];?></td>
+         <td height="24"><input required type="text" name="name"></td>
         </tr>
         <tr>
          <td height="24"><br>
            No KP Baru :</td>
-         <td height="24"><?php echo $row["new_ic"];?></td>
+         <td height="24"><input required type="text" name="new_ic"></td>
         </tr>
         <tr>
          <td height="24"><br>
            No KP Lama :</td>
-         <td height="24"><?php echo $row["name"];?></td>
+         <td height="24"><input required type="text" name="old_ic"></td>
         </tr>
 
       <ol class="breadcrumb">
@@ -110,18 +106,18 @@ if(!isset($_SESSION['username']))
        <tr>
          <td height="24"><br>
           Status Perkhidmatan: </td>
-         <td height="24"><?php echo $row["name"];?></td>
+         <td height="24"><input required type="text" name="status"></td>
         </tr>
 
          <tr>
          <td height="24"><br>
            Tempat Bertugas :</td>
-         <td height="24"><?php echo $row["name"];?></td>
+         <td height="24"><input required type="text" name="tempatbertugas"></td>
         </tr>
         <ol class="breadcrumb">
           <b style="color: #280e11; font-family: Verdana">Butiran Personal</b>
       </ol>
- <table width="380"  align="left" cellspacing="10px">
+ <table width="380"  align="left" cellspacing="12px">
        <tr>
          <th colspan="2" scope="col"></th>
        </tr>
@@ -129,97 +125,108 @@ if(!isset($_SESSION['username']))
        <tr>
          <td height="24"><br>
            Gelaran :</td>
-         <td height="24"><?php if($row["gelaran"]=="") echo ""; else echo $row["gelaran"];?></td>
+         <td height="24"><input required type="text" name="gelaran"></td>
         </tr>
 
          <tr>
          <td height="24"><br>
           Jantina :</td>
-        <td height="24"><?php echo $row["jantina"];?></td>
+        <td height="24"><input type="radio" name="jantina" value="lelaki"> Lelaki<br><input type="radio" name="jantina" value="perempuan"> Perempuan<br></td>
         </tr>
 
          <tr>
          <td height="24"><br>
            Agama :</td>
-         <td height="24"><?php echo $row["agama"];?></td>
+         <td height="24"><input required type="text" name="agama"></td>
          </tr>
 
          <tr>
          <td height="24"><br>
            Keturunan :</td>
-         <td height="24"><?php echo $row["keturunan"];?></td>
+         <td height="24"><br><input required type="text" name="keturunan"></td>
          </tr>
 
          <tr>
          <td height="24"><br>
           Umur :</td>
-         <td height="24"><?php echo $row["umur"];?></td>
+         <td height="24"><input required type="text" name="umur"></td>
          </tr>
 
          <tr>
          <td height="24"><br>
           Tarikh Lahir :</td>
-         <td height="24"><?php echo $row["dob"];?></td>
+         <td height="24"><input required type="date" name="dob"></td>
          </tr>
 
          <tr>
          <td height="24"><br>
            Tempat Kelahiran :</td>
-         <td height="24"><?php echo $row["pob"];?></td>
+         <td height="24"><input required type="text" name="pob"></td>
+         </tr>
+
+         <tr>
+         <td height="24"><br>
+           Kewarganegaraan :</td>
+         <td height="24"><input required type="text" name="nationality"></td>
+         </tr>
+         <tr>
+         <td height="24"><br>
+           Status Berkahwin :</td>
+         <td height="24"><input required type="text" name="marrital"></td>
          </tr>
 
          <tr>
          <td height="24"><br>
            Alamat Kediaman :</td>
-         <td height="24"><?php echo $row["alamat_kediaman"];?></td>
+         <td height="24"><input required type="text" name="alamat_kediaman"></td>
          </tr>
 
          <tr>
          <td height="24"><br>
            Poskod :</td>
-         <td height="24"><?php echo $row["poskod"];?></td>
+         <td height="24"><input required type="text" name="poskod"></td>
          </tr>
 
          <tr>
          <td height="24"><br>
            Bandar :</td>
-         <td height="24"><?php echo $row["bandar"];?></td>
+         <td height="24"><input required type="text" name="bandar"></td>
          </tr>
 
          <tr>
          <td height="24"><br>
            Negeri :</td>
-         <td height="24"><?php echo $row["negeri"];?></td>
+         <td height="24"><input required type="text" name="negeri"></td>
          </tr>
 
          <tr>
          <td height="24"><br>
            Negara :</td>
-         <td height="24"><?php echo $row["negara"];?></td>
+         <td height="24"><input required type="text" name="negara"></td>
          </tr>
 
          <tr>
          <td height="24"><br>
            Telefon Rumah :</td>
-         <td height="24"><?php echo $row["tel_rumah"];?></td>
+         <td height="24"><input required type="number" name="tel_rumah"></td>
          </tr>
 
          <tr>
          <td height="24"><br>
            Telefon Bimbit :</td>
-         <td height="24"><?php echo $row["tel_bimbit"];?></td>
+         <td height="24"><input required type="number" name="tel_bimbit"></td>
          </tr>
 
          <tr>
          <td height="24"><br>
            Nombor Telefon Pejabat :</td>
-         <td height="24"><?php echo $row["tel_pejabat"];?></td>
+         <td height="24"><input required type="number" name="tel_pejabat"></td>
          </tr>
 
          <tr>
          <td height="24"><br>
            Email Aktif :</td>
-         <td height="24"><?php echo $row["email"];?></td>
+         <td height="24"><input required type="email" name="email"></td>
          </tr>
 
 
@@ -228,6 +235,18 @@ if(!isset($_SESSION['username']))
           </td>
          <td height="24"><br></td>
          </tr>
+
+         <tr>
+        <td height="23" colspan="2"><div align="center"><br>
+        &nbsp; &nbsp; &nbsp; &nbsp;
+
+          <input type="submit" name="submit" id="submit" value="SUBMIT">
+           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          <input type="reset" name="reset" id="reset" value="RESET">
+
+        </td>
+        </tr>
+
   </table>
         </div>
       </div>

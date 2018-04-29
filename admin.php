@@ -74,6 +74,13 @@
               </div>
               <div class="control-group">
                 <div class="form-group floating-label-form-group controls">
+                  <label>IC Number</label>
+                  <input class="form-control" id="ic" name="ic" type="text" placeholder="IC Number" required data-validation-required-message="Please enter your name.">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
                   <label>Position</label>
                   <select class="form-control" name="level" id="level">
                     <option value="registrar">REGISTRAR</option>

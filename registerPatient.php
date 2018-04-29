@@ -155,49 +155,51 @@
 
 <center>
 <div align="center">
-<form id="form1" name="form1" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+
 <table width="550"  align="center" cellspacing="12px">
 
       <tr>
         <th colspan="2" scope="col"></th>
       </tr>
-
+      <tr>
+         
+        Scan card: <input type="text" id="txtboxCard" name="card">
+       
+      </tr>
       <tr>
           <td height="20" colspan="2"><div align="left"><br><p>
         Part A: Patient Information</p>
       </div></td></tr>
-
+<form id="form1" name="form1" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
       <tr>
         <td height="24"><br>
           Name :</td>
-        <td height="24"><br><input required style="width:80%" type="text" name="name"></td>
+        <td height="24"><br><input style="width:80%" type="text" name="name" id="name" readonly=""></td>
        </tr>
 
        <tr>
         <td height="24"><br>
           Matric/Staff No :</td>
-        <td height="24"><br><input required type="text" name="matric_staffno"></td>
+        <td height="24"><br><input type="text" name="matric_staffno" id="matric_staffno" readonly=""></td>
         </tr>
 
         <tr>
         <td height="24"><br>
           Faculty/Department :</td>
-        <td height="24"><br><input required type="text" name="fac_dept"></td>
+        <td height="24"><br><input type="text" name="fac_dept" id="fac_dept" readonly=""></td>
        </tr>
 
        <tr>
         <td height="24"><br>
           IC/Passport No :</td>
-        <td height="24"><br><input required type="text" name="ic_passno"></td>
+        <td height="24"><br><input type="text" name="ic_passno" id="ic_passno" readonly=""></td>
         </tr>
 
        <tr>
         <td height="24"><br>
           Position :</td>
         <td height="24"><br>
-         <input type="radio" name="position"  value="Staff" />Staff
-       &nbsp;&nbsp;&nbsp;
-            <input type="radio" name="position"  value="Student" />Student
+         <input type="text" name="position" id="position" readonly="" />
         </td>
         </tr>
 
@@ -205,29 +207,27 @@
         <td height="24"><br>
           Gender :</td>
         <td height="24"><br>
-         <input type="radio" name="gender"  value="Male" />Male
-       &nbsp;&nbsp;&nbsp;
-            <input type="radio" name="gender"  value="Female" />Female
+         <input type="text" name="gender" id="gender" readonly="" />
         </td>
         </tr>
 
         <tr>
         <td height="24"><br>
           Citizen :</td>
-        <td height="24"><br><input required type="text" name="citizen"></td>
+        <td height="24"><br><input type="text" id="citizen" name="citizen" readonly=""></td>
         </tr>
 
         <tr>
         <td height="24"><br>
           Telephone No :</td>
-        <td height="24"><br><input required type="text" name="phoneno"></td>
+        <td height="24"><br><input required type="text" id="phoneno" name="phoneno" readonly=""></td>
        </tr>
 
          <tr>
         <td height="24"><br>
           Address :</td>
         <td height="24"><br><label for="address"></label>
-          <textarea required name="address" cols="40" rows="4"></textarea></td>
+          <textarea required name="address" cols="40" rows="4" id="address" readonly=""></textarea></td>
         </tr>
 
         <tr>
@@ -370,6 +370,37 @@
 
 <!-- Custom scripts for this template -->
 <script src="js/freelancer.min.js"></script>
+<script type="text/javaScript">
+  $(document).ready(function(){
+    $("#txtboxCard").change(function(){
+     // alert("tryy");
+    $.ajax({
+    type:'POST',
+    url:'http://localhost/dentistry/data.php',
+    dataType : 'json',
+    data: {
+      cardNumber:$("#txtboxCard").val()
+    }
+  }).done(function(msg){
+     //alert(msg.name);
+     $("#name").val(msg.name);
+     $("#matric_staffno").val(msg.matric_staffno);
+     $("#fac_dept").val(msg.fac_dept);
+     $("#ic_passno").val(msg.ic_passno);
+     $("#position").val(msg.position);
+     $("#gender").val(msg.gender);
+     $("#citizen").val(msg.citizen);
+     $("#phoneno").val(msg.phoneno);
+     $("#address").val(msg.address);
+
+  });
+});
+
+});
+
+  
+
+</script>
 
 </body>
 

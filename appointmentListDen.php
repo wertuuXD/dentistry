@@ -56,7 +56,7 @@ if($_SESSION['username'] == '')
               <a class="nav-link js-scroll-trigger" href="report.php">Report Statistic</a>
             </li>
              <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="profile.php">Profile</a>
+              <a class="nav-link js-scroll-trigger" href="profileDen.php">Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="logout.php" onclick="javascript:return confirm('Are you sure you want to log out?');">Logout</a>
@@ -96,6 +96,7 @@ if($_SESSION['username'] == '')
    echo "<th>Date</th>";
    echo "<th>Time</th>";
    echo "<th>Patient Name</th>";
+   //echo $_SESSION['DentUser'];
 
    while($row = $result->fetch_assoc())
    {

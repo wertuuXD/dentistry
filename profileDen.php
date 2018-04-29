@@ -28,7 +28,7 @@ if(!isset($_SESSION['username']))
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="profile.php">Staff Management System</a>
+    <a class="navbar-brand" href="profileDen.php">Staff Management System</a>
     <!-- <a class="navbar-brand" href="profile.php">Start Bootstrap</a> -->
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -36,15 +36,21 @@ if(!isset($_SESSION['username']))
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Profile">
-          <a class="nav-link" href="profile.php">
+          <a class="nav-link" href="profileDen.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Profile</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="UTeM Dental System">
           <a class="nav-link" href="appointmentListReg.php">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">UTeM Dental System</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="applycuti.php">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Mohon Cuti</span>
           </a>
         </li>
       </ul>
@@ -79,7 +85,7 @@ if(!isset($_SESSION['username']))
       <!-- Breadcrumbs-->
       <div class="row">
         <div class="col-12">
-          <h1>Profile</h1>[<a href="editprofile.php">Edit</a>]
+          <h1>Profile</h1>[<a href="editprofileDen.php">Edit</a>]
           <form id="borang2" name="borang2" method="post" action="">
 
           <ol class="breadcrumb">
