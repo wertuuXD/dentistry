@@ -95,6 +95,7 @@
 <tbody>
 
 <?php
+session_start();
 include ('connect.php');
 
 $result = mysqli_query ($conn,"SELECT * FROM patient_info") or die

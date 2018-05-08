@@ -17,6 +17,7 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
   <link rel="stylesheet" href="css/monthly.css">
+  <link href="css/freelancer.min.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -29,7 +30,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Profile">
-          <a class="nav-link" href="profileDen.php">
+          <a class="nav-link" href="profilereg.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Profile</span>
           </a>
@@ -41,9 +42,15 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mohon Cuti">
-          <a class="nav-link" href="applycuti.php">
+          <a class="nav-link" href="applycutireg.php">
             <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Mohon Cuti</span>
+            <span class="nav-link-text">Apply Leave</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mohon Cuti">
+          <a class="nav-link" href="leavehistoryreg.php">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Leave History</span>
           </a>
         </li>
       </ul>
@@ -62,14 +69,66 @@
         <li class="breadcrumb-item">
           <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Mohon Cuti</li>
+        <li class="breadcrumb-item active">Leave History</li>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
-        
-            <div class="table-responsive">
-              
-          </div>
+        <div class="card-header">
+          <i class="fa fa-table"></i> Leave History</div>
+        <div class="card-body">
+          	<div class="table-responsive">
+          		<div id="form">
+                  <div class="content">
+                    <h3>Leave History</h3>
+                    <section>
+                      <table width="100%" class="table table-stripped table-hover table-bordered">
+                      <thead>
+                         <tr>
+                           <th></th>
+                           <th width="120">Leave Type</th>
+                           <th>From</th>
+                           <th>To</th>
+                           <th>Description</th>
+                           <th width="120">Posting Date</th>
+                           <th width="200">Admin Remak</th>
+                           <th>Status</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        include ('connect.php');
+
+                        $result = mysqli_query ($conn,"SELECT * FROM tblleaves") or die("Error running MySQL query") ; 
+
+                        while($row = mysqli_fetch_assoc($result))
+                        {
+                        echo "<tr>";
+                        echo "<td>".$row['leave_id']."</td>";
+                        echo "<td>".$row['LeaveType']."</td>";
+                        echo "<td>".$row['ToDate']."</td>";
+                        echo "<td>".$row['FromDate']."</td>";
+                        echo "<td>".$row['Description']."</td>";
+                        echo "<td>".$row['PostingDate']."</td>";
+                        echo "<td>".$row['AdminRemark']."</td>";
+                        if ($row['Status'] == 0)
+                        {
+                          echo "<td>Not Approved</td>";
+                        }
+                        else
+                        {
+                          echo "<td>Approved</td>";
+                        }
+                        
+                        echo "<tr>";
+                      }
+                        ?>
+
+                      </tbody>
+                      </table>
+                    </section>
+                  </div>  
+              </div>
+        	</div>
         </div>
         <div class="card-footer small text-muted">Mohon Cuti</div>
       </div>
@@ -118,9 +177,9 @@
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/monthly.js"></script>
+	<script type="text/javascript" src="js/monthly.js"></script>
 
-  
+	
 
   </div>
 </body>

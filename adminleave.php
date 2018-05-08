@@ -41,7 +41,7 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mohon Cuti">
-          <a class="nav-link" href="applycuti.php">
+          <a class="nav-link" href="applycutireg.php">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Mohon Cuti</span>
           </a>
@@ -67,8 +67,72 @@
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         
+          <div class="table-responsive">
+            <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Leave History</div>
+        <div class="card-body">
             <div class="table-responsive">
-              
+              <div id="form">
+                  <div class="content">
+                    <h3>Leave History</h3>
+                    <section>
+                      <table width="100%" class="table table-stripped table-hover table-bordered">
+                      <thead>
+                         <tr>
+                           <th></th>
+                           <th width="120">Leave Type</th>
+                           <th>From</th>
+                           <th>To</th>
+                           <th>Description</th>
+                           <th width="120">Posting Date</th>
+                           <th width="200">Admin Remak</th>
+                           <th>Status</th>
+                           <th>Details</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        include ('connect.php');
+
+                        $result = mysqli_query ($conn,"SELECT * FROM tblleaves") or die("Error running MySQL query") ; 
+
+                        while($row = mysqli_fetch_assoc($result))
+                        {
+                        echo "<tr>";
+                        echo "<td>".$row['leave_id']."</td>";
+                        echo "<td>".$row['LeaveType']."</td>";
+                        echo "<td>".$row['ToDate']."</td>";
+                        echo "<td>".$row['FromDate']."</td>";
+                        echo "<td>".$row['Description']."</td>";
+                        echo "<td>".$row['PostingDate']."</td>";
+                        echo "<td>".$row['AdminRemark']."</td>";
+                        
+                        if ($row['Status'] == 0)
+                        {
+                          echo "<td>Not Approved</td>";
+                        }
+                        else
+                        {
+                          echo "<td>Approved</td>";
+                        }
+
+                        echo "<td><a href='adminleavedetail.php?leave_id=".$row['leave_id']."'>Click Me Faggot</a></td>";
+                        
+                        echo "<tr>";
+                      }
+                        ?>
+
+                      </tbody>
+                      </table>
+                    </section>
+                  </div>  
+              </div>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Mohon Cuti</div>
+      </div>    
           </div>
         </div>
         <div class="card-footer small text-muted">Mohon Cuti</div>

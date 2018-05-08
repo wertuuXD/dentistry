@@ -1,3 +1,42 @@
+<?php
+session_start();
+include ('connect.php');
+
+$sql2 = "SELECT * FROM user WHERE username = '".$_SESSION['username']."'" ;
+  $query2 = mysqli_query($conn, $sql2) ;
+  $result2 = mysqli_fetch_assoc($query2) ;
+
+  $profile = "SELECT * FROM profile WHERE level = '".$result2['level']."'" ;
+  $query1 = mysqli_query($conn, $profile) ;
+  $result1 = mysqli_fetch_assoc($query1) ;
+
+if(isset($_POST['apply']))
+{
+    $leavetype=$_POST['leavetype'];
+    $fromdate=$_POST['fromdate'];  
+    $todate=$_POST['todate'];
+    $description=$_POST['description']; 
+    $empid = $result1['empid']; 
+    $status=0;
+    $isread=0;
+    if($fromdate > $todate)
+    {
+     $error=" ToDate should be greater than FromDate ";
+    }
+
+    $sql = mysqli_query($conn, "INSERT INTO tblleaves(LeaveType, ToDate, FromDate, Description, Status, IsRead, empid) VALUES ('$leavetype','$fromdate','$todate','$description','$status','$isread', '$empid') ");
+
+    echo '<script language="javascript">';
+        echo 'alert("Successfull");';
+        echo 'window.location.href="applycutireg.php";';
+        echo '</script>';
+
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +68,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Profile">
-          <a class="nav-link" href="profileDen.php">
+          <a class="nav-link" href="profilereg.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Profile</span>
           </a>
@@ -41,9 +80,15 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mohon Cuti">
-          <a class="nav-link" href="applycuti.php">
+          <a class="nav-link" href="applycutireg.php">
             <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Mohon Cuti</span>
+            <span class="nav-link-text">Apply Leave</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mohon Cuti">
+          <a class="nav-link" href="leavehistoryreg.php">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Leave History</span>
           </a>
         </li>
       </ul>
@@ -66,10 +111,42 @@
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
-        
-            <div class="table-responsive">
-              
-          </div>
+        <div class="card-header">
+          <i class="fa fa-table"></i> Mohon Cuti</div>
+        <div class="card-body">
+          	<div class="table-responsive">
+          		<div id="form">
+                <form id="example-form" method="post" name="applycuti">
+                  <div class="content">
+                    <h3>Apply for Leave</h3>
+                    <section>
+                      <div class="input-field">
+                        <select name="leavetype" autocomplete="off">
+                        <option>Select leave type..</option>
+                        <option value="Casual Leave">Casual Leave</option>
+                        <option value="Medical Leave">Medical Leave</option>
+                        </select>
+                      </div>
+                      <div class="input-field">
+                        <label for="fromdate">From Date</label><br>
+                        <input type="date" name="fromdate"> 
+                      </div>
+                      <div class="input-field">
+                        <label for="fromdate">To Date</label><br>
+                        <input type="date" name="todate"> 
+                      </div>
+                      <div class="input-field">
+                        <label for="description">Description</label><br>
+                        <textarea name="description" length="500"></textarea>
+                      </div>
+                      <div>
+                        <button type="submit" name="apply" id="apply">Apply</button>
+                      </div>
+                    </section>
+                  </div>
+                </form>  
+              </div>
+        	</div>
         </div>
         <div class="card-footer small text-muted">Mohon Cuti</div>
       </div>
@@ -118,9 +195,9 @@
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/monthly.js"></script>
+	<script type="text/javascript" src="js/monthly.js"></script>
 
-  
+	
 
   </div>
 </body>

@@ -1,15 +1,27 @@
+<?php
+session_start();
+include 'connect.php';
+
+if($_SESSION['username'] == "")
+{
+  echo '<script type="text/JavaScript">alert("...");location.href="index.php"</script>';
+  exit();
+}
+else
+{
+  $sql = "SELECT * FROM user WHERE username = '".$_SESSION['username']."'" ;
+  $query = mysqli_query($conn, $sql) ;
+  $result = mysqli_fetch_assoc($query) ;
+
+  $profile = "SELECT * FROM profile WHERE level = '".$result['level']."'" ;
+  $query1 = mysqli_query($conn, $profile) ;
+  $result1 = mysqli_fetch_assoc($query1) ;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-<?php
 
-session_start();
-
-if(!isset($_SESSION['username']))
-{
-    header("Location: login.php");
-    exit;
-}
- ?>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,22 +33,24 @@ if(!isset($_SESSION['username']))
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/monthly.css">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="profilereg.php">Staff Management System</a>
-    <!-- <a class="navbar-brand" href="profile.php">Start Bootstrap</a> -->
+    <a class="navbar-brand" href="index.html">Staff Management System</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Profile">
-          <a class="nav-link" href="profilereg.php">
+          <a class="nav-link" href="profileDen.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Profile</span>
           </a>
@@ -44,20 +58,13 @@ if(!isset($_SESSION['username']))
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="UTeM Dental System">
           <a class="nav-link" href="appointmentListReg.php">
             <i class="fa fa-fw fa-link"></i>
-            <span class="nav-link-text">UTeM Dental System</span>
+            <span class="nav-link-text">Utem Dental System</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mohon Cuti">
-          <a class="nav-link" href="applycuti.php">
+          <a class="nav-link" href="applycutireg.php">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Mohon Cuti</span>
-          </a>
-        </li>
-      </ul>
-      <ul class="navbar-nav sidenav-toggler">
-        <li class="nav-item">
-          <a class="nav-link text-center" id="sidenavToggler">
-            <i class="fa fa-fw fa-angle-left"></i>
           </a>
         </li>
       </ul>
@@ -69,173 +76,35 @@ if(!isset($_SESSION['username']))
       </ul>
     </div>
   </nav>
-
-  <?php
-    //fetch data from database
-    include ('connect.php');
-    $sql = "SELECT * FROM profile" ;
-    $result = mysqli_query($conn,$sql) or die("Error running MySQL query");
-    $row = mysqli_fetch_assoc($result);
-
-?>
-  ?>
-
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
-      <div class="row">
-        <div class="col-12">
-          <h1>Profile</h1>[<a href="editprofileReg.php">Edit</a>]
-          <form id="borang2" name="borang2" method="post" action="">
-
-          <ol class="breadcrumb">
-            <b style="color: #280e11; font-family: Verdana">Pamer Maklumat Personal</b>
-          </ol>
-
-          <img src="s" align="left">
-       <tr>
-         <td height="24"><br>
-           Nama Staff :</td>
-         <td height="24"><?php echo $row["name"];?></td>
-        </tr>
-        <tr>
-         <td height="24"><br>
-           No KP Baru :</td>
-         <td height="24"><?php echo $row["new_ic"];?></td>
-        </tr>
-        <tr>
-         <td height="24"><br>
-           No KP Lama :</td>
-         <td height="24"><?php echo $row["name"];?></td>
-        </tr>
-
       <ol class="breadcrumb">
-          <b style="color: #280e11; font-family: Verdana">Status Perkhidmatan</b>
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Profile</li>
       </ol>
-
-       <tr>
-         <td height="24"><br>
-          Status Perkhidmatan: </td>
-         <td height="24"><?php echo $row["name"];?></td>
-        </tr>
-
-         <tr>
-         <td height="24"><br>
-           Tempat Bertugas :</td>
-         <td height="24"><?php echo $row["name"];?></td>
-        </tr>
-        <ol class="breadcrumb">
-          <b style="color: #280e11; font-family: Verdana">Butiran Personal</b>
-      </ol>
- <table width="380"  align="left" cellspacing="10px">
-       <tr>
-         <th colspan="2" scope="col"></th>
-       </tr>
-
-       <tr>
-         <td height="24"><br>
-           Gelaran :</td>
-         <td height="24"><?php if($row["gelaran"]=="") echo ""; else echo $row["gelaran"];?></td>
-        </tr>
-
-         <tr>
-         <td height="24"><br>
-          Jantina :</td>
-        <td height="24"><?php echo $row["jantina"];?></td>
-        </tr>
-
-         <tr>
-         <td height="24"><br>
-           Agama :</td>
-         <td height="24"><?php echo $row["agama"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-           Keturunan :</td>
-         <td height="24"><?php echo $row["keturunan"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-          Umur :</td>
-         <td height="24"><?php echo $row["umur"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-          Tarikh Lahir :</td>
-         <td height="24"><?php echo $row["dob"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-           Tempat Kelahiran :</td>
-         <td height="24"><?php echo $row["pob"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-           Alamat Kediaman :</td>
-         <td height="24"><?php echo $row["alamat_kediaman"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-           Poskod :</td>
-         <td height="24"><?php echo $row["poskod"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-           Bandar :</td>
-         <td height="24"><?php echo $row["bandar"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-           Negeri :</td>
-         <td height="24"><?php echo $row["negeri"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-           Negara :</td>
-         <td height="24"><?php echo $row["negara"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-           Telefon Rumah :</td>
-         <td height="24"><?php echo $row["tel_rumah"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-           Telefon Bimbit :</td>
-         <td height="24"><?php echo $row["tel_bimbit"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-           Nombor Telefon Pejabat :</td>
-         <td height="24"><?php echo $row["tel_pejabat"];?></td>
-         </tr>
-
-         <tr>
-         <td height="24"><br>
-           Email Aktif :</td>
-         <td height="24"><?php echo $row["email"];?></td>
-         </tr>
-
-
-         <tr>
-         <td height="24"><br>
-          </td>
-         <td height="24"><br></td>
-         </tr>
-  </table>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        
+          <div class="table-responsive">
+              <form id="profileform" method="POST">
+                <p>PROFILE</p>
+                <p id="editProfile" style="color: blue;">Edit Profile</p>
+                <p>Name: <input type="text" name="name" value="<?php echo $result1['name']; ?>" size="<?php echo (strlen($result1['name'])+5);?>" readonly></p>
+                <p>Email: <input id="email" type="text" name="email" value="<?php echo $result1['email']; ?>" size="<?php echo (strlen($result1['email'])+5);?>" readonly></p>
+                <p>Phone No: <input id="phoneNo" type="text" name="phoneNo" value="<?php echo $result1['phoneNo']; ?>" size="<?php echo (strlen($result1['phoneNo'])+5);?>" readonly></p>
+                <p>Gender: <input type="text" name="gender" value="<?php echo $result1['gender']; ?>" size="<?php echo (strlen($result1['gender'])+5);?>" readonly></p>
+                <p>IC Number: <input type="text" name="icNo" value="<?php echo $result1['icNo']; ?>" size="<?php echo (strlen($result1['icNo'])+5);?>" readonly></p>
+                <p>Date of Birth: <input type="text" name="dob" value="<?php echo $result1['dob']; ?>" size="<?php echo (strlen($result1['dob'])+5);?>" readonly></p>
+                <p>Address: <input type="textarea" name="address" value="<?php echo $result1['address']; ?>" size="<?php echo (strlen($result1['address'])+8);?>" readonly></p>
+                <input id="subButton" type="submit" name="submit" style="display: none;">
+                <input id="canButton" type="button" name="cancel" value="Cancel" style="display: none;">
+              </form>
+          </div>
         </div>
+        <div class="card-footer small text-muted">Profile</div>
       </div>
     </div>
     <!-- /.container-fluid-->
@@ -264,7 +133,7 @@ if(!isset($_SESSION['username']))
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="logout.php">Logout</a>
+            <a class="btn btn-primary" href="login.php">Logout</a>
           </div>
         </div>
       </div>
@@ -274,8 +143,42 @@ if(!isset($_SESSION['username']))
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="js/sb-admin-datatables.min.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/monthly.js"></script>
+
+  <script>
+    $("#editProfile").click(function() 
+    {
+        $("#email").attr("readonly", false) ;
+        $("#phoneNo").attr("readonly", false) ;
+        $("#address").attr("readonly", false) ;
+        $("#profileform").attr("action", 'profileprocess.php');
+        $("#subButton").show() ;
+        $("#canButton").show() ;
+    })
+
+     $("#canButton").click(function() 
+    {
+        $("#email").attr("readonly", true) ;
+        $("#phoneNo").attr("readonly", true) ;
+        $("#address").attr("readonly", true) ;
+        $("#profileform").attr("action", '#');
+        $("#subButton").hide() ;
+        $("#canButton").hide() ;
+    })
+  </script>
+
+
+
+  
+
   </div>
 </body>
 
