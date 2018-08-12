@@ -90,7 +90,20 @@
     $medtaken = $_POST['medicationtaken'];
 
 
-    //prepare and bind
+    $matcheck = mysqli_query($conn,"SELECT matric_staffno FROM patient_info WHERE matric_staffno='$matr'");
+    // $matcheckResult = mysqli_fetch_array($matcheck);
+    // $stmt2 = $conn->prepare("SELECT matric_staffno FROM patient_info WHERE matric_staffno = ?") ;
+    // $stmt2->bind_param("s",$matr);
+    // $stmt2->execute();
+
+
+    if(mysqli_num_rows($matcheck)>=1)
+    {
+      echo "<script>alert('The patient had been registered');</script>";
+    }
+    else
+    {
+      //prepare and bind
     $stmt = $conn->prepare("INSERT INTO patient_info(name,matric_staffno,fac_dept,ic_passno,position, gender,citizen,phoneno,address,patient_consent)
          VALUES (?,?,?,?,?,?,?,?,?,?)") ;
     $stmt->bind_param("ssssssssss", $nm, $matr, $fac, $ic, $posit, $gdr, $ctz, $tel, $adrs, $cons);
@@ -118,6 +131,9 @@
 
     $stmt1->close();
     $conn->close();
+    }
+
+    
 
 
 
@@ -174,60 +190,65 @@
       <tr>
         <td height="24"><br>
           Name :</td>
-        <td height="24"><br><input style="width:80%" type="text" name="name" id="name" readonly=""></td>
+        <td height="24"><br><input required style="width:80%" type="text" name="name" id="name" ></td>
        </tr>
 
        <tr>
         <td height="24"><br>
           Matric/Staff No :</td>
-        <td height="24"><br><input type="text" name="matric_staffno" id="matric_staffno" readonly=""></td>
+        <td height="24"><br><input required type="text" name="matric_staffno" id="matric_staffno" ></td>
         </tr>
 
         <tr>
         <td height="24"><br>
           Faculty/Department :</td>
-        <td height="24"><br><input type="text" name="fac_dept" id="fac_dept" readonly=""></td>
+        <td height="24"><br><input required type="text" name="fac_dept" id="fac_dept" ></td>
        </tr>
 
        <tr>
         <td height="24"><br>
           IC/Passport No :</td>
-        <td height="24"><br><input type="text" name="ic_passno" id="ic_passno" readonly=""></td>
+        <td height="24"><br><input required type="text" name="ic_passno" id="ic_passno" ></td>
         </tr>
 
        <tr>
         <td height="24"><br>
           Position :</td>
         <td height="24"><br>
-         <input type="text" name="position" id="position" readonly="" />
+         <input required type="text" name="position" id="position"  />
         </td>
         </tr>
 
         <tr>
         <td height="24"><br>
           Gender :</td>
+        <!-- <td height="24"><br>
+         <input required type="text" name="gender" id="gender"  />
+        </td> -->
         <td height="24"><br>
-         <input type="text" name="gender" id="gender" readonly="" />
+         <input type="radio" name="gender"  value="MALE" /> MALE
+       &nbsp;&nbsp;&nbsp;
+            <input type="radio" name="gender"  value="FEMALE" /> FEMALE
         </td>
         </tr>
 
         <tr>
         <td height="24"><br>
           Citizen :</td>
-        <td height="24"><br><input type="text" id="citizen" name="citizen" readonly=""></td>
+        <td height="24"><br><input required type="text" id="citizen" name="citizen" ></td>
         </tr>
 
         <tr>
         <td height="24"><br>
           Telephone No :</td>
-        <td height="24"><br><input required type="text" id="phoneno" name="phoneno" readonly=""></td>
+        <td height="24"><br><input required type="text" id="phoneno" name="phoneno" ></td>
        </tr>
 
          <tr>
         <td height="24"><br>
           Address :</td>
         <td height="24"><br><label for="address"></label>
-          <textarea required name="address" cols="40" rows="4" id="address" readonly=""></textarea></td>
+          <textarea required name="address" cols="40" rows="4" id="address" ></textarea></td>
         </tr>
 
         <tr>

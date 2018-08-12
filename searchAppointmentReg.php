@@ -85,17 +85,17 @@
 <form id="searchAppReg" name="searchAppReg" action="searchAppointmentReg.php" method="post">
 
 
-<?php
-$link=mysqli_connect ("localhost", "root", "abcd1234");
-mysqli_select_db ($link, "dental");
-?>
+
 
 <table class="table table-stripped table-hover table-bordered">
 
 <?php
+include ('connect.php');
 if (isset ($_POST["search"]))
 {
-$res=mysqli_query($link,"select * from appointment where name='$_POST[valueToSearch]'");
+$name=$_POST['valueToSearch'];
+// $res=mysqli_query($conn,"select * from appointment where name='$_POST[valueToSearch]'");
+$res=mysqli_query($conn,"SELECT * FROM appointment WHERE name like '%$name%' ") or die("Error running MySQL query"); 
         echo "<tr><th>Appointment Date</th>";
         echo "<th>Appointment Time</th>";
         echo "<th>Patient Name</th>";

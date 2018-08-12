@@ -1,23 +1,41 @@
 <?php
 session_start();
-include 'connect.php';
+include ('connect.php');
 
-if($_SESSION['username'] == "")
-{
-  echo '<script type="text/JavaScript">alert("...");location.href="index.php"</script>';
-  exit();
-}
-else
-{
-  $sql = "SELECT * FROM user WHERE username = '".$_SESSION['username']."'" ;
-  $query = mysqli_query($conn, $sql) ;
-  $result = mysqli_fetch_assoc($query) ;
+$sql2 = "SELECT * FROM user WHERE username = '".$_SESSION['username']."'" ;
+  $query2 = mysqli_query($conn, $sql2) ;
+  $result2 = mysqli_fetch_assoc($query2) ;
 
-  $profile = "SELECT * FROM profile WHERE level = '".$result['level']."'" ;
+  $profile = "SELECT * FROM profile WHERE level = '".$result2['level']."'" ;
   $query1 = mysqli_query($conn, $profile) ;
   $result1 = mysqli_fetch_assoc($query1) ;
+
+if(isset($_POST['apply']))
+{
+    $leavetype=$_POST['leavetype'];
+    $fromdate=$_POST['fromdate'];  
+    $todate=$_POST['todate'];
+    $description=$_POST['description']; 
+    $empid = $result1['empid']; 
+    $status=0;
+    $isread=0;
+    if($fromdate > $todate)
+    {
+     $error=" ToDate should be greater than FromDate ";
+    }
+
+    $sql = mysqli_query($conn, "INSERT INTO tblleaves(LeaveType, FromDate,ToDate, Description, Status, IsRead, empid) VALUES ('$leavetype','$todate','$fromdate', '$description','$status','$isread', '$empid') ");
+
+    echo '<script language="javascript">';
+        echo 'alert("Successfull");';
+        echo 'window.location.href="applycutireg.php";';
+        echo '</script>';
+
 }
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,21 +68,27 @@ else
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Profile">
-          <a class="nav-link" href="profilereg.php">
+          <a class="nav-link" href="profileDen.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Profile</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="UTeM Dental System">
-          <a class="nav-link" href="appointmentListReg.php">
+          <a class="nav-link" href="appointmentListDen.php">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">Utem Dental System</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mohon Cuti">
-          <a class="nav-link" href="applycutireg.php">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Apply Leave">
+          <a class="nav-link" href="applycutiden.php">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Apply Leave</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Leave History">
+          <a class="nav-link" href="leavehistoryden.php">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Leave History</span>
           </a>
         </li>
       </ul>
@@ -83,28 +107,48 @@ else
         <li class="breadcrumb-item">
           <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Profile</li>
+        <li class="breadcrumb-item active">Apply Leave</li>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
-        
-          <div class="table-responsive">
-              <form id="profileform" method="POST">
-                <p>PROFILE</p>
-                <p id="editProfile" style="color: blue;">Edit Profile</p>
-                <p>Name: <input type="text" name="name" value="<?php echo $result1['name']; ?>" size="<?php echo (strlen($result1['name'])+5);?>" readonly></p>
-                <p>Email: <input id="email" type="text" name="email" value="<?php echo $result1['email']; ?>" size="<?php echo (strlen($result1['email'])+5);?>" readonly></p>
-                <p>Phone No: <input id="phoneNo" type="text" name="phoneNo" value="<?php echo $result1['phoneNo']; ?>" size="<?php echo (strlen($result1['phoneNo'])+5);?>" readonly></p>
-                <p>Gender: <input type="text" name="gender" value="<?php echo $result1['gender']; ?>" size="<?php echo (strlen($result1['gender'])+5);?>" readonly></p>
-                <p>IC Number: <input type="text" name="icNo" value="<?php echo $result1['icNo']; ?>" size="<?php echo (strlen($result1['icNo'])+5);?>" readonly></p>
-                <p>Date of Birth: <input type="text" name="dob" value="<?php echo $result1['dob']; ?>" size="<?php echo (strlen($result1['dob'])+5);?>" readonly></p>
-                <p>Address: <input type="textarea" name="address" value="<?php echo $result1['address']; ?>" size="<?php echo (strlen($result1['address'])+8);?>" readonly></p>
-                <input id="subButton" type="submit" name="submit" style="display: none;">
-                <input id="canButton" type="button" name="cancel" value="Cancel" style="display: none;">
-              </form>
-          </div>
+        <div class="card-header">
+          <i class="fa fa-table"></i> Apply Leave</div>
+        <div class="card-body">
+          	<div class="table-responsive">
+          		<div id="form">
+                <form id="example-form" method="post" name="applycuti">
+                  <div class="content">
+                    <h3>Apply for Leave</h3>
+                    <section>
+                      <div class="input-field">
+                        <select name="leavetype" autocomplete="off">
+                        <option>Select leave type..</option>
+                        <option value="Casual Leave">Casual Leave</option>
+                        <option value="Medical Leave">Medical Leave</option>
+                        </select>
+                      </div>
+                      <div class="input-field">
+                        <label for="fromdate">From Date</label><br>
+                        <input type="date" name="fromdate"> 
+                      </div>
+                      <div class="input-field">
+                        <label for="fromdate">To Date</label><br>
+                        <input type="date" name="todate"> 
+                      </div>
+                      <div class="input-field">
+                        <label for="description">Description</label><br>
+                        <textarea name="description" length="500"></textarea>
+                      </div>
+                      <div>
+                        <button type="submit" name="apply" id="apply">Apply</button>
+                      </div>
+                    </section>
+                  </div>
+                </form>  
+              </div>
+        	</div>
         </div>
-        <div class="card-footer small text-muted">Profile</div>
+        <div class="card-footer small text-muted">Mohon Cuti</div>
       </div>
     </div>
     <!-- /.container-fluid-->
@@ -151,33 +195,9 @@ else
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/monthly.js"></script>
+	<script type="text/javascript" src="js/monthly.js"></script>
 
-  <script>
-    $("#editProfile").click(function() 
-    {
-        $("#email").attr("readonly", false) ;
-        $("#phoneNo").attr("readonly", false) ;
-        $("#address").attr("readonly", false) ;
-        $("#profileform").attr("action", 'profileprocess.php');
-        $("#subButton").show() ;
-        $("#canButton").show() ;
-    })
-
-     $("#canButton").click(function() 
-    {
-        $("#email").attr("readonly", true) ;
-        $("#phoneNo").attr("readonly", true) ;
-        $("#address").attr("readonly", true) ;
-        $("#profileform").attr("action", '#');
-        $("#subButton").hide() ;
-        $("#canButton").hide() ;
-    })
-  </script>
-
-
-
-  
+	
 
   </div>
 </body>

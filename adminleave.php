@@ -22,28 +22,22 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Staff Management System</a>
+    <a class="navbar-brand" href="admindashboard.php">Admin Dashboard</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Profile">
-          <a class="nav-link" href="profileDen.php">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="User Registration">
+          <a class="nav-link" href="admin.php">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Profile</span>
+            <span class="nav-link-text">User Registration</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="UTeM Dental System">
-          <a class="nav-link" href="appointmentListReg.php">
+          <a class="nav-link" href="adminleave.php">
             <i class="fa fa-fw fa-link"></i>
-            <span class="nav-link-text">Utem Dental System</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mohon Cuti">
-          <a class="nav-link" href="applycutireg.php">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Mohon Cuti</span>
+            <span class="nav-link-text">Manage Leaves</span>
           </a>
         </li>
       </ul>
@@ -62,7 +56,7 @@
         <li class="breadcrumb-item">
           <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Mohon Cuti</li>
+        <li class="breadcrumb-item active">Leave History</li>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
@@ -87,7 +81,7 @@
                            <th>To</th>
                            <th>Description</th>
                            <th width="120">Posting Date</th>
-                           <th width="200">Admin Remak</th>
+                           <th width="200">Admin Remark</th>
                            <th>Status</th>
                            <th>Details</th>
                           </tr>
@@ -118,7 +112,7 @@
                           echo "<td>Approved</td>";
                         }
 
-                        echo "<td><a href='adminleavedetail.php?leave_id=".$row['leave_id']."'>Click Me Faggot</a></td>";
+                        echo "<td><a href='adminleavedetail.php?leave_id=".$row['leave_id']."'>Update</a></td>";
                         
                         echo "<tr>";
                       }
@@ -131,11 +125,11 @@
               </div>
           </div>
         </div>
-        <div class="card-footer small text-muted">Mohon Cuti</div>
+        <div class="card-footer small text-muted">Leave History</div>
       </div>    
           </div>
         </div>
-        <div class="card-footer small text-muted">Mohon Cuti</div>
+        <div class="card-footer small text-muted">Leave History</div>
       </div>
     </div>
     <!-- /.container-fluid-->
@@ -164,7 +158,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.php">Logout</a>
+            <a class="btn btn-primary" href="index.php">Logout</a>
           </div>
         </div>
       </div>

@@ -34,11 +34,11 @@ if (isset($_POST['login']))
         }
         else if ($row['level'] == "admin")
         {
-            header("Location:admin.php?error=0");
+            header("Location:admindashboard.php?error=0");
         }
         else
         {
-           header("Location:login.php?error=2");
+           header("Location:index.php?error=2");
         }
         
     }

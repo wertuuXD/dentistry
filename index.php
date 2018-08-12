@@ -31,7 +31,7 @@
   
   if(isset($_REQUEST['error']))
   {
-    echo "<script>alert('Please input correct username and password')
+    echo "<script>alert('You enter wrong details')
         
     </script>";
 

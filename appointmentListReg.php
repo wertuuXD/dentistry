@@ -103,6 +103,7 @@ if(!isset($_SESSION['username']))
      echo "<th>Date</th>";
      echo "<th>Time</th>";
      echo "<th>Patient Name</th>";
+     
 
      while($row = $result->fetch_assoc())
      {
@@ -112,6 +113,7 @@ if(!isset($_SESSION['username']))
        echo "<td>".$row['queue_date']."</td>";
        echo "<td>".$row['queue_time']."</td>";
        echo "<td>".$row['name']."</td>";
+
      ?>
    <?php
    echo "</tr>";

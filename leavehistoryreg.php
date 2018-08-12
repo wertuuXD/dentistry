@@ -17,7 +17,6 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
   <link rel="stylesheet" href="css/monthly.css">
-  <link href="css/freelancer.min.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -73,11 +72,8 @@
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-table"></i> Leave History</div>
-        <div class="card-body">
-          	<div class="table-responsive">
-          		<div id="form">
+          <div class="table-responsive">
+              <div id="form">
                   <div class="content">
                     <h3>Leave History</h3>
                     <section>
@@ -90,7 +86,7 @@
                            <th>To</th>
                            <th>Description</th>
                            <th width="120">Posting Date</th>
-                           <th width="200">Admin Remak</th>
+                           <th width="200">Admin Remark</th>
                            <th>Status</th>
                           </tr>
                       </thead>
@@ -128,9 +124,9 @@
                     </section>
                   </div>  
               </div>
-        	</div>
+          </div>
         </div>
-        <div class="card-footer small text-muted">Mohon Cuti</div>
+        <div class="card-footer small text-muted">Leave History</div>
       </div>
     </div>
     <!-- /.container-fluid-->
@@ -159,7 +155,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.php">Logout</a>
+            <a class="btn btn-primary" href="index.php">Logout</a>
           </div>
         </div>
       </div>
@@ -177,9 +173,11 @@
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/monthly.js"></script>
+  <script type="text/javascript" src="js/monthly.js"></script>
 
-	
+
+
+  
 
   </div>
 </body>

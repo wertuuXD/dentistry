@@ -4,7 +4,7 @@
    	date_default_timezone_set("Asia/Kuala_Lumpur");
     $date = date("Y-m-d");
     $pid = $_POST['pid'];
-    $time = $_POST['atime'];
+    $time = $_POST['btime'];
     $number = $_POST['qq'];
 
 // $sql = "INSERT INTO queue VALUES ( '' , '$date' , '$time' , '$number' , '$pid') ";

@@ -156,6 +156,24 @@ $id = $_SESSION['id'];
        <br>
        <br>
     <center>
+      <div>
+        <img src="img/white.jpg" height="43" sizes="" />
+        <img src="img/white.jpg" height="43"/>
+        <img src="img/white.jpg" height="43"/>
+        <img src="img/nombor/55.jpg" height="43"/>
+        <img src="img/nombor/54.jpg" height="43"/>
+        <img src="img/nombor/53.jpg" height="43"/>
+        <img src="img/nombor/52.jpg" height="43"/>
+        <img src="img/nombor/51.jpg" height="43"/>
+        <img src="img/nombor/61.jpg" height="43"/>
+        <img src="img/nombor/62.jpg" height="43"/>
+        <img src="img/nombor/63.jpg" height="43"/>
+        <img src="img/nombor/64.jpg" height="43"/>
+        <img src="img/nombor/65.jpg" height="43"/>
+        <img src="img/white.jpg" height="43"/>
+        <img src="img/white.jpg" height="43"/>
+        <img src="img/white.jpg" height="43"/>
+      </div>
     <div>
         <img src="img/white.jpg" height="42"/>
         <img src="img/white.jpg" height="42"/>
@@ -234,7 +252,44 @@ $id = $_SESSION['id'];
         <img src="img/<?php echo ($row==null ?"normal2" :$row['gg_28']) ?>.png" id="gg_28" height="42" class="btn1 btn-success"  data-id="28"/>
         <input type="Hidden" name="gg_28" id="hid_gg_28" value="<?php echo ($row==null ?"normal2" :$row['gg_28']) ?>">     
     </div>    
-    <div class="gap">
+    <div>
+      <img src="img/nombor/18.jpg" height="44"/>
+      <img src="img/nombor/17.jpg" height="44"/>
+      <img src="img/nombor/16.jpg" height="44"/>
+      <img src="img/nombor/15.jpg" height="44"/>
+      <img src="img/nombor/14.jpg" height="44"/>
+      <img src="img/nombor/13.jpg" height="44"/>
+      <img src="img/nombor/12.jpg" height="44"/>
+      <img src="img/nombor/11.jpg" height="44"/>
+      <img src="img/nombor/21.jpg" height="44"/>
+      <img src="img/nombor/22.jpg" height="44"/>
+      <img src="img/nombor/23.jpg" height="44"/>
+      <img src="img/nombor/24.jpg" height="44"/>
+      <img src="img/nombor/25.jpg" height="44"/>
+      <img src="img/nombor/26.jpg" height="44"/>
+      <img src="img/nombor/27.jpg" height="44"/>
+      <img src="img/nombor/28.jpg" height="44"/>
+    </div>  
+    <div>
+      <br>
+    </div>
+    <div>
+      <img src="img/nombor/48.jpg" height="44"/>
+      <img src="img/nombor/47.jpg" height="44"/>
+      <img src="img/nombor/46.jpg" height="44"/>
+      <img src="img/nombor/45.jpg" height="44"/>
+      <img src="img/nombor/44.jpg" height="44"/>
+      <img src="img/nombor/43.jpg" height="44"/>
+      <img src="img/nombor/42.jpg" height="44"/>
+      <img src="img/nombor/41.jpg" height="44"/>
+      <img src="img/nombor/31.jpg" height="44"/>
+      <img src="img/nombor/32.jpg" height="44"/>
+      <img src="img/nombor/33.jpg" height="44"/>
+      <img src="img/nombor/34.jpg" height="44"/>
+      <img src="img/nombor/35.jpg" height="44"/>
+      <img src="img/nombor/36.jpg" height="44"/>
+      <img src="img/nombor/37.jpg" height="44"/>
+      <img src="img/nombor/38.jpg" height="44"/>
     </div>  
     <div>
         <img src="img/<?php echo ($row==null ?"normal2" :$row['gg_48']) ?>.png" id="gg_48" height="42" class="btn1 btn-success"  data-id="48"/>
@@ -298,6 +353,24 @@ $id = $_SESSION['id'];
         <img src="img/white.jpg" height="42"/>        
         <img src="img/white.jpg" height="42"/>       
     </div>
+    <div>
+        <img src="img/white.jpg" height="42"/>
+        <img src="img/white.jpg" height="42"/>
+        <img src="img/white.jpg" height="42"/>
+        <img src="img/nombor/85.jpg" height="42"/>
+        <img src="img/nombor/84.jpg" height="42"/>
+        <img src="img/nombor/83.jpg" height="42"/>
+        <img src="img/nombor/82.jpg" height="42"/>
+        <img src="img/nombor/81.jpg" height="42"/>
+        <img src="img/nombor/71.jpg" height="42"/>
+        <img src="img/nombor/72.jpg" height="42"/>
+        <img src="img/nombor/73.jpg" height="42"/>
+        <img src="img/nombor/74.jpg" height="42"/>
+        <img src="img/nombor/75.jpg" height="42"/>
+        <img src="img/white.jpg" height="42"/>
+        <img src="img/white.jpg" height="42"/>
+        <img src="img/white.jpg" height="42"/>
+      </div>
     <?php  }  ?>
     </center>
   
@@ -668,9 +741,9 @@ $id = $_SESSION['id'];
          <td height="23" colspan="2"><div align="center"><br><br>
          &nbsp; &nbsp; &nbsp; &nbsp;
           <br>
-           <input type="submit" name="SUBMIT" id="SUBMIT" value="SUBMIT">
+           <input type="submit" class="btn btn-success btn-lg" name="SUBMIT" id="SUBMIT" value="SUBMIT">
              &nbsp; &nbsp; &nbsp; 
-           <input type="reset" name="RESET" id="RESET" value="RESET">
+           <input type="reset" class="btn btn-success btn-lg" name="RESET" id="RESET" value="RESET">
          </div></td>
          </tr>
      </table>

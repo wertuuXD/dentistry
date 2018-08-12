@@ -1,24 +1,3 @@
-<?php
-session_start();
-include 'connect.php';
-
-if($_SESSION['username'] == "")
-{
-  echo '<script type="text/JavaScript">alert("...");location.href="index.php"</script>';
-  exit();
-}
-else
-{
-  $sql = "SELECT * FROM user WHERE username = '".$_SESSION['username']."'" ;
-  $query = mysqli_query($conn, $sql) ;
-  $result = mysqli_fetch_assoc($query) ;
-
-  $profile = "SELECT * FROM profile WHERE level = '".$result['level']."'" ;
-  $query1 = mysqli_query($conn, $profile) ;
-  $result1 = mysqli_fetch_assoc($query1) ;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,21 +29,27 @@ else
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Profile">
-          <a class="nav-link" href="profilereg.php">
+          <a class="nav-link" href="profileDen.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Profile</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="UTeM Dental System">
-          <a class="nav-link" href="appointmentListReg.php">
+          <a class="nav-link" href="appointmentListDen.php">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">Utem Dental System</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mohon Cuti">
-          <a class="nav-link" href="applycutireg.php">
+          <a class="nav-link" href="applycutiden.php">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Apply Leave</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mohon Cuti">
+          <a class="nav-link" href="leavehistoryden.php">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Leave History</span>
           </a>
         </li>
       </ul>
@@ -83,28 +68,65 @@ else
         <li class="breadcrumb-item">
           <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Profile</li>
+        <li class="breadcrumb-item active">Leave History</li>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
-        
           <div class="table-responsive">
-              <form id="profileform" method="POST">
-                <p>PROFILE</p>
-                <p id="editProfile" style="color: blue;">Edit Profile</p>
-                <p>Name: <input type="text" name="name" value="<?php echo $result1['name']; ?>" size="<?php echo (strlen($result1['name'])+5);?>" readonly></p>
-                <p>Email: <input id="email" type="text" name="email" value="<?php echo $result1['email']; ?>" size="<?php echo (strlen($result1['email'])+5);?>" readonly></p>
-                <p>Phone No: <input id="phoneNo" type="text" name="phoneNo" value="<?php echo $result1['phoneNo']; ?>" size="<?php echo (strlen($result1['phoneNo'])+5);?>" readonly></p>
-                <p>Gender: <input type="text" name="gender" value="<?php echo $result1['gender']; ?>" size="<?php echo (strlen($result1['gender'])+5);?>" readonly></p>
-                <p>IC Number: <input type="text" name="icNo" value="<?php echo $result1['icNo']; ?>" size="<?php echo (strlen($result1['icNo'])+5);?>" readonly></p>
-                <p>Date of Birth: <input type="text" name="dob" value="<?php echo $result1['dob']; ?>" size="<?php echo (strlen($result1['dob'])+5);?>" readonly></p>
-                <p>Address: <input type="textarea" name="address" value="<?php echo $result1['address']; ?>" size="<?php echo (strlen($result1['address'])+8);?>" readonly></p>
-                <input id="subButton" type="submit" name="submit" style="display: none;">
-                <input id="canButton" type="button" name="cancel" value="Cancel" style="display: none;">
-              </form>
-          </div>
+          		<div id="form">
+                  <div class="content">
+                    <h3>Leave History</h3>
+                    <section>
+                      <table width="100%" class="table table-stripped table-hover table-bordered">
+                      <thead>
+                         <tr>
+                           <th></th>
+                           <th width="120">Leave Type</th>
+                           <th>From</th>
+                           <th>To</th>
+                           <th>Description</th>
+                           <th width="120">Posting Date</th>
+                           <th width="200">Admin Remak</th>
+                           <th>Status</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        include ('connect.php');
+
+                        $result = mysqli_query ($conn,"SELECT * FROM tblleaves") or die("Error running MySQL query") ; 
+
+                        while($row = mysqli_fetch_assoc($result))
+                        {
+                        echo "<tr>";
+                        echo "<td>".$row['leave_id']."</td>";
+                        echo "<td>".$row['LeaveType']."</td>";
+                        echo "<td>".$row['ToDate']."</td>";
+                        echo "<td>".$row['FromDate']."</td>";
+                        echo "<td>".$row['Description']."</td>";
+                        echo "<td>".$row['PostingDate']."</td>";
+                        echo "<td>".$row['AdminRemark']."</td>";
+                        if ($row['Status'] == 0)
+                        {
+                          echo "<td>Not Approved</td>";
+                        }
+                        else
+                        {
+                          echo "<td>Approved</td>";
+                        }
+                        
+                        echo "<tr>";
+                      }
+                        ?>
+
+                      </tbody>
+                      </table>
+                    </section>
+                  </div>  
+              </div>
+        	</div>
         </div>
-        <div class="card-footer small text-muted">Profile</div>
+        <div class="card-footer small text-muted">Leave History</div>
       </div>
     </div>
     <!-- /.container-fluid-->
@@ -133,7 +155,7 @@ else
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="index.php">Logout</a>
+            <a class="btn btn-primary" href="login.php">Logout</a>
           </div>
         </div>
       </div>
@@ -152,28 +174,6 @@ else
     <script src="js/sb-admin-datatables.min.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
   <script type="text/javascript" src="js/monthly.js"></script>
-
-  <script>
-    $("#editProfile").click(function() 
-    {
-        $("#email").attr("readonly", false) ;
-        $("#phoneNo").attr("readonly", false) ;
-        $("#address").attr("readonly", false) ;
-        $("#profileform").attr("action", 'profileprocess.php');
-        $("#subButton").show() ;
-        $("#canButton").show() ;
-    })
-
-     $("#canButton").click(function() 
-    {
-        $("#email").attr("readonly", true) ;
-        $("#phoneNo").attr("readonly", true) ;
-        $("#address").attr("readonly", true) ;
-        $("#profileform").attr("action", '#');
-        $("#subButton").hide() ;
-        $("#canButton").hide() ;
-    })
-  </script>
 
 
 

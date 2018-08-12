@@ -135,16 +135,16 @@ $id = $_GET['id'];
               <?php
               date_default_timezone_set("Asia/Kuala_Lumpur");
                ?>
-            <td height="24"><br><input type="input" disabled value="<?php echo date("Y-m-d");?>" name="dateQueue"></td>
+            <td height="24"><br><input type="input" disabled value="<?php date_default_timezone_set("Asia/Kuala_Lumpur");echo date("Y-m-d");?>" name="dateQueue"></td>
             <input type="input" name="pid" hidden value="<?php echo $id;?>" >
             </tr>
             <tr>
                  <td height="24"><br>
                    Time:</td>
                    <?php
-                   date_default_timezone_set("Asia/Kuala_Lumpur");
+                    
                     ?>
-                 <td height="24"><br><input type="time"  value="" name="atime"></td>
+                 <td height="24"><br><input type="time" readonly value="<?php date_default_timezone_set("Asia/Kuala_Lumpur");echo date('H:i', time());?>" id="atime" name="btime"></td>
 
                  </tr>
            <br>
@@ -152,8 +152,23 @@ $id = $_GET['id'];
             <tr>
             <td height="24"><br>
               Queue Number :</td>
-            <td height="24"><br>
-              <select name="qq" >
+            <td height="24">
+              <br>
+              <?php
+              // $today = "'".date_default_timezone_set('Asia/Kuala_Lumpur')."'";
+              $today =date("Y-m-d");
+              $stmt2 = $mysqli->prepare("SELECT COUNT(*) as Total FROM queue WHERE queue_date = ?");
+              $stmt2->bind_param('s', $today);
+              $stmt2->execute();
+              $result2=$stmt2->get_result();
+              $row2 = $result2->fetch_assoc();
+              $count = $row2['Total']+1;
+
+              ?>
+              <input type="input" readonly value="<?php
+              echo $count;
+              ?>" id="q" name="qq">
+              <!-- <select name="qq" >
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -170,11 +185,7 @@ $id = $_GET['id'];
                 <option value="14">14</option>
 
 
-              </select>
-
-
-
-
+              </select> -->
             </td>
             </tr>
 
@@ -189,7 +200,8 @@ $id = $_GET['id'];
       </table>
     </form>
 
-     <br>
+
+    <br>
 </div>
 
 </div>
